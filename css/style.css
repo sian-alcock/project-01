@@ -1,3 +1,27 @@
 * {
-  box-sizing: border-box;
-}
+  box-sizing: border-box; }
+
+h1, h2, p {
+  font-family: sunflower, sans-serif; }
+
+.game {
+  width: 600px;
+  height: 600px;
+  margin: auto;
+  padding: 50px; }
+
+.player1Grid, .player2Grid {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-wrap: wrap; }
+
+.player1Grid div, .player2Grid div {
+  width: calc(100% / 10);
+  height: calc(100% / 10);
+  border: 1px solid grey; }
+
+.planted {
+  background-color: yellow; }
+
+/*# sourceMappingURL=style.css.map */

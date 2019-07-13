@@ -26,6 +26,6 @@ h1, h2, p {
   border: 1px solid grey;
 }
 
-.planted {
+*[class^='planted'] {
   background-color: yellow;
 }

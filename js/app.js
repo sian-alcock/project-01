@@ -9,17 +9,19 @@ document.addEventListener('DOMContentLoaded', () => {
 
   //Create player grid(s)
 
-  function createPlayerGrid (player) {
-
+  function createPlayerGrid (playerNumber, grid) {
+  // Create a code of p1-grid and p2-grid to include in the data-id to distinguish between player1's grid and player2's grid
+    const shortCode = `p${playerNumber}-grid`
     for(let i = 1; i <= (gridWidth * gridWidth); i++) {
       const gridDiv = document.createElement('div')
-      player.appendChild(gridDiv)
+      grid.appendChild(gridDiv)
       gridDiv.setAttribute('class', 'empty')
+      gridDiv.setAttribute('data-id', `${shortCode}-${i}`)
     }
   }
 
-  createPlayerGrid(player1Grid)
-  createPlayerGrid(player2Grid)
+  createPlayerGrid(1, player1Grid)
+  createPlayerGrid(2, player2Grid)
 
   const player1GridCells = Array.from(document.querySelectorAll('.player1Grid div'))
   const player2GridCells = Array.from(document.querySelectorAll('.player2Grid div'))
@@ -53,14 +55,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // console.log(player1GridCells)
 
-  function getValidStartingCells(orientation, cropLength) {
-    player1GridCells.forEach((cell, i) => {
+  function getValidStartingCells(orientation, cropLength, gridCells) {
+    // Select which playergrid
+    gridCells.forEach((cell, i) => {
       if(orientation === 'horizontal') {
         // if the cells fall within the grid and are empty (ie do not contain the class of empty, then push into the validStartCells array)
         let counter = 1
         let cellValidCheck = false
         while (counter < cropLength) {
-          if(i % gridWidth <= cropLength && !player1GridCells[i].classList.contains('planted')) {
+          if(i % gridWidth <= cropLength && !gridCells[i].classList.contains('planted')) {
             cellValidCheck = true
             // console.log('these cells are in the grid AND are empty')
           } else {
@@ -79,7 +82,7 @@ document.addEventListener('DOMContentLoaded', () => {
         let counter = 1
         let cellValidCheck = false
         while (counter < cropLength) {
-          if(i + (gridWidth*(cropLength-1)) <= 99 && !player1GridCells[i].classList.contains('planted')) {
+          if(i + (gridWidth*(cropLength-1)) <= 99 && !gridCells[i].classList.contains('planted')) {
             cellValidCheck = true
             // console.log('these cells are in the grid AND are empty')
           } else {
@@ -96,52 +99,54 @@ document.addEventListener('DOMContentLoaded', () => {
     )
   } // end of forEach loop
   // TESTING FOR ABOVE FUNCTION - DON'T DELETE ********
+
+  // getValidStartingCells('vertical', 5, player1GridCells)
   // console.log({validStartCells})
-  // getValidStartingCells('vertical', 5)
   // console.log(validStartCells.length)
   // const randomIndex = Math.floor(Math.random()* validStartCells.length)
   // console.log(randomIndex)
   // console.log(validStartCells[randomIndex])
 
 
-  function populateGrid() {
-    for (const length in crops) {
+  function populateGrid(gridCells) {
+    // Select which playergrid
+    for (const crop in crops) {
       // get crop length
-      const cropLength = (crops[length])
+      const cropLength = crops[crop]
       // set crop orientation
       const cropOrientation = setCropOrientation()
       // get valid cells (ie ones in which crops can be planted without falling out of the grid or overlaying existing crops)
-      getValidStartingCells(cropOrientation, cropLength)
+      getValidStartingCells(cropOrientation, cropLength, gridCells)
       console.log(validStartCells)
       // choose a random cell in which to plant the plantCrops
       const randomCellIndex = Math.floor(Math.random()*validStartCells.length)
-      const randomCell = validStartCells[randomCellIndex]
+      const randomCellDataId = validStartCells[randomCellIndex].getAttribute('data-id')
       // plant the crops!
-      plantCrops(orientation, cropLength, randomCell)
+      plantCrops(orientation, crop, cropLength, randomCellDataId, gridCells)
     } // end of for loop
   } //end of function
 
-  populateGrid()
+  populateGrid(player1GridCells)
 
-  function plantCrops(orientation, cropLength, randomCell) {
-    const randomCellIndex = player1GridCells.indexOf(randomCell)
+  function plantCrops(orientation, crop, cropLength, randomCellDataId, gridCells) {
+    const randomCellIndex = gridCells.findIndex(div => div.dataset.id === randomCellDataId)
     if(orientation === 'horizontal') {
       let i = 0
       while (i < cropLength) {
-        player1GridCells[randomCellIndex+i].setAttribute('class', 'planted')
+        gridCells[randomCellIndex+i].setAttribute('class', `planted-${crop}`)
         i++
       }
     }
     if(orientation === 'vertical') {
       let i = 0
       while (i < cropLength) {
-        player1GridCells[randomCellIndex+(i*gridWidth)].setAttribute('class', 'planted')
+        gridCells[randomCellIndex+(i*gridWidth)].setAttribute('class', `planted-${crop}`)
         i++
       }
     }
   }
   //Test function below
-  // plantCrops('vertical', 5, 9)
+  // plantCrops('horizontal', 5, 1)
 
 
 

@@ -21,7 +21,7 @@ h1, h2, p {
   height: calc(100% / 10);
   border: 1px solid grey; }
 
-.planted {
+*[class^='planted'] {
   background-color: yellow; }
 
 /*# sourceMappingURL=style.css.map */

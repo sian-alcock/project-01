@@ -22,19 +22,23 @@ h1, h2, p {
   height: calc(100% / 10);
   border: 1px solid grey; }
 
-*[class*='crop1'] {
+.crop1 {
   background-color: yellow; }
 
-*[class*='crop2'] {
+.crop2 {
   background-color: red; }
 
-*[class*='crop3'] {
+.crop3 {
   background-color: blue; }
 
-*[class*='crop4'] {
+.crop4 {
   background-color: green; }
 
-*[class*='crop5'] {
+.crop5 {
   background-color: purple; }
+
+.picked {
+  background-color: dodgerblue;
+  border: green; }
 
 /*# sourceMappingURL=style.css.map */

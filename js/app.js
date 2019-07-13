@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const player1Grid = document.querySelector('.player1Grid')
   const player2Grid = document.querySelector('.player2Grid')
-
+  const changeCrops = document.querySelector('#changeCrops')
 
   const gridWidth = 10
   let orientation = null
@@ -30,7 +30,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   //   Let the computer choose either vertical or horizontal orientation for the crops at random.
 
-  let validStartCells = []
+  const validHorizontalStartCells = []
+  const validVerticalStartCells = []
 
   const crops = {
     crop1: 5,
@@ -55,7 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // console.log(player1GridCells)
 
-  function getValidStartingCells(orientation, cropLength, gridCells) {
+  function getValidStartingCells(orientation, crop, cropLength, gridCells) {
     // Select which playergrid
     gridCells.forEach((cell, i) => {
       if(orientation === 'horizontal') {
@@ -63,7 +64,7 @@ document.addEventListener('DOMContentLoaded', () => {
         let counter = 1
         let cellValidCheck = false
         while (counter < cropLength) {
-          if(i % gridWidth <= cropLength && !gridCells[i].classList.contains('planted')) {
+          if(i % gridWidth <= cropLength && !gridCells[i].classList.contains(`planted-${crop}`)) {
             cellValidCheck = true
             // console.log('these cells are in the grid AND are empty')
           } else {
@@ -72,8 +73,8 @@ document.addEventListener('DOMContentLoaded', () => {
           counter++
         }
         if(cellValidCheck === true) {
-          validStartCells.push(cell)
-          return validStartCells
+          validHorizontalStartCells.push(cell)
+          return validHorizontalStartCells
         }
       }
 
@@ -82,7 +83,7 @@ document.addEventListener('DOMContentLoaded', () => {
         let counter = 1
         let cellValidCheck = false
         while (counter < cropLength) {
-          if(i + (gridWidth*(cropLength-1)) <= 99 && !gridCells[i].classList.contains('planted')) {
+          if(i + (gridWidth*(cropLength-1)) <= 99 && !gridCells[i].classList.contains(`planted-${crop}`)) {
             cellValidCheck = true
             // console.log('these cells are in the grid AND are empty')
           } else {
@@ -91,8 +92,8 @@ document.addEventListener('DOMContentLoaded', () => {
           counter++
         }
         if(cellValidCheck === true) {
-          validStartCells.push(cell)
-          return validStartCells
+          validVerticalStartCells.push(cell)
+          return validVerticalStartCells
         }
       }
     }
@@ -116,17 +117,23 @@ document.addEventListener('DOMContentLoaded', () => {
       // set crop orientation
       const cropOrientation = setCropOrientation()
       // get valid cells (ie ones in which crops can be planted without falling out of the grid or overlaying existing crops)
-      getValidStartingCells(cropOrientation, cropLength, gridCells)
-      console.log(validStartCells)
+      getValidStartingCells(cropOrientation, crop, cropLength, gridCells)
       // choose a random cell in which to plant the plantCrops
-      const randomCellIndex = Math.floor(Math.random()*validStartCells.length)
-      const randomCellDataId = validStartCells[randomCellIndex].getAttribute('data-id')
+      if(cropOrientation === 'horizontal') {
+        const randomCellIndex = Math.floor(Math.random()*validHorizontalStartCells.length)
+        const randomCellDataId = validHorizontalStartCells[randomCellIndex].getAttribute('data-id')
+        plantCrops(cropOrientation, crop, cropLength, randomCellDataId, gridCells)
+      }
+      if(cropOrientation === 'vertical') {
+        const randomCellIndex = Math.floor(Math.random()*validVerticalStartCells.length)
+        const randomCellDataId = validVerticalStartCells[randomCellIndex].getAttribute('data-id')
+        plantCrops(cropOrientation, crop, cropLength, randomCellDataId, gridCells)
+      }
       // plant the crops!
-      plantCrops(orientation, crop, cropLength, randomCellDataId, gridCells)
     } // end of for loop
   } //end of function
 
-  populateGrid(player1GridCells)
+
 
   function plantCrops(orientation, crop, cropLength, randomCellDataId, gridCells) {
     const randomCellIndex = gridCells.findIndex(div => div.dataset.id === randomCellDataId)
@@ -148,7 +155,7 @@ document.addEventListener('DOMContentLoaded', () => {
   //Test function below
   // plantCrops('horizontal', 5, 1)
 
-
+  changeCrops.addEventListener('click', populateGrid(player1GridCells))
 
 
   // Starting with the largest/longest crop (eg 5 tomatoes) computer needs to identify all the valid starting cells (ie a cell in which the first crop item can be dropped which has the required number of cells to the right (or below) in which the remaining crop items can be dropped.  For example, for a crop containing 6 items, the starting cell must be at least 6 cells away from the bottom of the grid if oriented vertically or 6 cells away from the right of the grid if oriented horizontally.

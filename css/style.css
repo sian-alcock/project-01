@@ -5,14 +5,15 @@ h1, h2, p {
   font-family: sunflower, sans-serif; }
 
 .game {
-  width: 600px;
-  height: 600px;
   margin: auto;
-  padding: 50px; }
+  padding: 50px;
+  display: flex;
+  justify-content: space-between;
+  border: 1px solid grey; }
 
 .player1Grid, .player2Grid {
-  width: 100%;
-  height: 100%;
+  width: 400px;
+  height: 400px;
   display: flex;
   flex-wrap: wrap; }
 
@@ -21,7 +22,19 @@ h1, h2, p {
   height: calc(100% / 10);
   border: 1px solid grey; }
 
-*[class^='planted'] {
+*[class*='crop1'] {
   background-color: yellow; }
+
+*[class*='crop2'] {
+  background-color: red; }
+
+*[class*='crop3'] {
+  background-color: blue; }
+
+*[class*='crop4'] {
+  background-color: green; }
+
+*[class*='crop5'] {
+  background-color: purple; }
 
 /*# sourceMappingURL=style.css.map */

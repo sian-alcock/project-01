@@ -223,12 +223,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
   let goCount = 0
   const arrayHits = []
+  const cropsDestroyedPlayer1 = {}
+  const cropsDestroyedPlayer2 = {}
 
   function userGo () {
 
     const cropsArray = Object.keys(crops)
 
     if(!this.classList.contains('hit') && !this.classList.contains('miss')) {
+
+      //hit loop starts here
       if(this.classList.contains('planted')) {
         this.classList.add('hit')
         arrayHits.push(this)
@@ -239,12 +243,22 @@ document.addEventListener('DOMContentLoaded', () => {
         const classList = Array.from(this.classList)
         const hitCrop = classList.filter(crop => cropsArray.includes(crop))
         console.log(hitCrop)
+        // check to see if this crop type has been completely destroyed
         if(arrayHits.filter(cell => cell.classList.contains(hitCrop)).length === crops[hitCrop]) {
+          cropsDestroyedPlayer1[hitCrop] = true
+          console.log(cropsDestroyedPlayer1)
           console.log(`hurrah - you destroyed the whole of ${hitCrop}`)
+        }
+
+        // check to see if all crops have been destroyed (end of game!!)
+
+        if(cropsArray.every(crop => cropsDestroyedPlayer1[crop])) {
+          console.log('GAME OVER!!!!!  You win the GAME!!!!!@')
         }
 
         computerGo()
         goCount++
+        // hit loop ends here ...
       } else {
         this.classList.add('miss')
         computerGo()

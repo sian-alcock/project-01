@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const player1Grid = document.querySelector('.player1Grid')
   const player2Grid = document.querySelector('.player2Grid')
   const changeCrops = document.querySelector('#changeCrops')
+  const startBtn = document.querySelector('#start')
 
   const gridWidth = 10
   let orientation = null
@@ -22,6 +23,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
   createPlayerGrid(1, player1Grid)
   createPlayerGrid(2, player2Grid)
+
+  function setUpGame () {
+    //Populate both grids and get the computer selections
+    populateGrid(player1GridCells)
+    populateGrid(player2GridCells)
+    getPlayer2Selection()
+    player2GridCells.forEach(cell => cell.addEventListener('click', userPick))
+  }
 
   const player1GridCells = Array.from(document.querySelectorAll('.player1Grid div'))
   const player2GridCells = Array.from(document.querySelectorAll('.player2Grid div'))
@@ -126,8 +135,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
   function populateGrid(gridCells) {
-    //Clear existing grid
-    // clearGrids()
+
+
     // Select which playergrid
     for (const crop in crops) {
       // get crop length
@@ -142,14 +151,21 @@ document.addEventListener('DOMContentLoaded', () => {
         const randomCellIndex = Math.floor(Math.random()*validHorizontalStartCells.length)
         const randomCellDataId = validHorizontalStartCells[randomCellIndex].getAttribute('data-id')
         plantCrops(cropOrientation, crop, cropLength, randomCellDataId, gridCells)
+
       }
       if(cropOrientation === 'vertical') {
         const randomCellIndex = Math.floor(Math.random()*validVerticalStartCells.length)
         const randomCellDataId = validVerticalStartCells[randomCellIndex].getAttribute('data-id')
         plantCrops(cropOrientation, crop, cropLength, randomCellDataId, gridCells)
+
       }
       // plant the crops!
     } // end of for loop
+
+    // Check the grid for cells where there are two classes of crops in a single cell...if so, start again
+      // const gridCheck = gridCells.filter(cell => cell.classList.contains('planted'))
+        // console.log('is this code running?')
+
   } //end of function
 
 
@@ -170,23 +186,50 @@ document.addEventListener('DOMContentLoaded', () => {
         i++
       }
     }
+    const plantedCells = gridCells.filter(cell => cell.classList.contains('planted'))
+    if(plantedCells.length < 17) {
+      console.log('This grid contains overwritten cells')
+    } else {
+      console.log('This grid is pukka!!')
+    }
   }
+
   //Test function below
   // plantCrops('horizontal', 5, 1)
 
 
-  populateGrid(player1GridCells)
-  console.log(validVerticalStartCells)
+
+  // console.log(validVerticalStartCells)
 
 
   // **********************Play the Game ********************************
 
-  function pickCell () {
-    this.classList.add('picked')
+  const player2SelectedCells = player1GridCells
+
+  function getPlayer2Selection () {
+    // This function is run at setup - it contains the cells that the computer will select
+    // For MVP - simply shuffle the cells into a random order by putting each element in object with random sort key, then sorting using the random key then unmap to get the original objects
+
+    player2SelectedCells
+      .map((a) => ({sort: Math.random(), value: a}))
+      .sort((a, b) => a.sort - b.sort)
+      .map((a) => a.value)
+    console.log(player2SelectedCells)
+  }
+
+
+  // Play the game!! Player 1 picks a cell, then computer has a turn and so on...
+  function userPick () {
+    if(this.classList.contains('planted')) {
+      this.classList.add('hit')
+    } else {
+      this.classList.add('miss')
+    }
   }
 
   // changeCrops.addEventListener('click', populateGrid.bind(player2GridCells))
-  player2GridCells.forEach(cell => cell.addEventListener('click', pickCell))
+  startBtn.addEventListener('click', setUpGame)
+
 
 
 

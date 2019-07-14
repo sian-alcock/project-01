@@ -27,30 +27,54 @@ h1, h2, p {
   height: calc(100% / 10);
   border: 1px solid grey;
 }
+.player1Grid {
+  .crop1 {
+    background-color: yellow;
+    // background-image: url("http://clipartmag.com/images/vegetable-drawings-3.jpg");
+    background-size: contain;
+  }
 
-.crop1 {
-  background-color: yellow;
+  .crop2 {
+    background-color: red;
+  }
+
+  .crop3 {
+    background-color: blue;
+  }
+
+  .crop4 {
+    background-color: green;
+  }
+  .crop5 {
+    background-color: purple;
+  }
 }
 
-.crop2 {
-  background-color: red;
+.player2Grid {
+  .crop1 {
+    border: 2px solid yellow;
+  }
+
+  .crop2 {
+    border: 2px solid red;
+  }
+
+  .crop3 {
+    border: 2px solid  blue;
+  }
+
+  .crop4 {
+    border: 2px solid  green;
+  }
+  .crop5 {
+    border: 2px solid  purple;
+  }
+  .picked {
+    background-color: dodgerblue;
+    border: green;
+  }
 }
 
-.crop3 {
-  background-color: blue;
-}
-
-.crop4 {
-  background-color: green;
-}
-.crop5 {
-  background-color: purple;
-}
-
-.picked {
-  background-color: dodgerblue;
-  border: green;
-}
 // .planted {
 //   background-color:
 // }

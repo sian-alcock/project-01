@@ -24,16 +24,19 @@ document.addEventListener('DOMContentLoaded', () => {
   createPlayerGrid(1, player1Grid)
   createPlayerGrid(2, player2Grid)
 
-  function setUpGame () {
+  function setUpGame() {
+  
     //Populate both grids and get the computer selections
     populateGrid(player1GridCells)
     populateGrid(player2GridCells)
     getPlayer2Selection()
-    player2GridCells.forEach(cell => cell.addEventListener('click', userPick))
   }
+
 
   const player1GridCells = Array.from(document.querySelectorAll('.player1Grid div'))
   const player2GridCells = Array.from(document.querySelectorAll('.player2Grid div'))
+
+
 
   //************Generate player grid content****************
 
@@ -214,7 +217,7 @@ document.addEventListener('DOMContentLoaded', () => {
       .map((a) => ({sort: Math.random(), value: a}))
       .sort((a, b) => a.sort - b.sort)
       .map((a) => a.value)
-    console.log(player2SelectedCells)
+    // console.log(player2SelectedCells)
   }
 
 
@@ -229,6 +232,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // changeCrops.addEventListener('click', populateGrid.bind(player2GridCells))
   startBtn.addEventListener('click', setUpGame)
+  player2GridCells.forEach(cell => cell.addEventListener('click', userPick))
+
+
+
+
+
 
 
 

@@ -69,12 +69,13 @@ h1, h2, p {
   .crop5 {
     border: 2px solid  purple;
   }
-  .picked {
+  .hit {
     background-color: dodgerblue;
     border: green;
   }
-}
 
-// .planted {
-//   background-color:
-// }
+  .miss {
+    background-color: grey;
+    border: green;
+  }
+}

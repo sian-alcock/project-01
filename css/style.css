@@ -44,8 +44,11 @@ h1, h2, p {
   border: 2px solid  green; }
 .player2Grid .crop5 {
   border: 2px solid  purple; }
-.player2Grid .picked {
+.player2Grid .hit {
   background-color: dodgerblue;
+  border: green; }
+.player2Grid .miss {
+  background-color: grey;
   border: green; }
 
 /*# sourceMappingURL=style.css.map */

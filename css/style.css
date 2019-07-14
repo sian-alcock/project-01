@@ -33,6 +33,12 @@ h1, h2, p {
   background-color: green; }
 .player1Grid .crop5 {
   background-color: purple; }
+.player1Grid .hit {
+  background-color: dodgerblue;
+  border: green; }
+.player1Grid .miss {
+  background-color: grey;
+  border: green; }
 
 .player2Grid .crop1 {
   border: 2px solid yellow; }
@@ -50,5 +56,9 @@ h1, h2, p {
 .player2Grid .miss {
   background-color: grey;
   border: green; }
+
+#start.disabled {
+  opacity: 0.65;
+  cursor: not-allowed; }
 
 /*# sourceMappingURL=style.css.map */

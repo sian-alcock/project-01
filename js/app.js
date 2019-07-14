@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
   createPlayerGrid(2, player2Grid)
 
   function setUpGame() {
-  
+
     //Populate both grids and get the computer selections
     populateGrid(player1GridCells)
     populateGrid(player2GridCells)
@@ -139,8 +139,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function populateGrid(gridCells) {
 
-
-    // Select which playergrid
     for (const crop in crops) {
       // get crop length
       const cropLength = crops[crop]
@@ -222,17 +220,52 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
   // Play the game!! Player 1 picks a cell, then computer has a turn and so on...
-  function userPick () {
-    if(this.classList.contains('planted')) {
-      this.classList.add('hit')
+
+  let goCount = 0
+  const arrayHits = []
+
+  function userGo () {
+
+    const cropsArray = Object.keys(crops)
+
+    if(!this.classList.contains('hit') && !this.classList.contains('miss')) {
+      if(this.classList.contains('planted')) {
+        this.classList.add('hit')
+        arrayHits.push(this)
+        console.log(arrayHits)
+
+        // check the crop
+
+        const classList = Array.from(this.classList)
+        const hitCrop = classList.filter(crop => cropsArray.includes(crop))
+        console.log(hitCrop)
+        if(arrayHits.filter(cell => cell.classList.contains(hitCrop)).length === crops[hitCrop]) {
+          console.log(`hurrah - you destroyed the whole of ${hitCrop}`)
+        }
+
+        computerGo()
+        goCount++
+      } else {
+        this.classList.add('miss')
+        computerGo()
+        goCount++
+      }
+    }
+  } // don't do anything if the user has already clicked the cell
+
+
+
+  function computerGo () {
+    if(player2SelectedCells[goCount].classList.contains('planted')) {
+      player2SelectedCells[goCount].classList.add('hit')
     } else {
-      this.classList.add('miss')
+      player2SelectedCells[goCount].classList.add('miss')
     }
   }
 
   // changeCrops.addEventListener('click', populateGrid.bind(player2GridCells))
   startBtn.addEventListener('click', setUpGame)
-  player2GridCells.forEach(cell => cell.addEventListener('click', userPick))
+  player2GridCells.forEach(cell => cell.addEventListener('click', userGo))
 
 
 

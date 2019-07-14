@@ -20,10 +20,10 @@ document.addEventListener('DOMContentLoaded', () => {
   let orientation = null
   let player2SelectedCells
   let goCount = 0
-  const arrayHitsPlayer1 = []
-  const arrayHitsPlayer2 = []
-  const cropsDestroyedPlayer1 = {}
-  const cropsDestroyedPlayer2 = {}
+  let arrayHitsPlayer1 = []
+  let arrayHitsPlayer2 = []
+  let cropsDestroyedPlayer1 = {}
+  let cropsDestroyedPlayer2 = {}
   const cropsArray = Object.keys(crops)
 
   //Create player grid(s)
@@ -43,31 +43,50 @@ document.addEventListener('DOMContentLoaded', () => {
   createPlayerGrid(1, player1Grid)
   createPlayerGrid(2, player2Grid)
 
-  function resetGrid(gridCells) {
+  function resetGrid(player, gridCells) {
     // Create grids
+
+    let arrayHits
+    let cropsDestroyed
+    let scoreBoard
+
+    if(player === 1) {
+      scoreBoard = scoreBoardPlayer1
+      arrayHits = arrayHitsPlayer1
+      cropsDestroyed = cropsDestroyedPlayer1
+    } else if(player === 2){
+      scoreBoard = scoreBoardPlayer2
+      arrayHits = arrayHitsPlayer2
+      cropsDestroyed = cropsDestroyedPlayer2
+    }
+    
+    arrayHits = []
+    cropsDestroyed = {}
     gridCells.forEach(cell => cell.className='empty')
+    scoreBoard.innerHTML = '<ul></ul>'
+    goCount = 0
   }
 
 
   function setUpGame() {
-    resetGrid(player1GridCells)
+    resetGrid(1, player1GridCells)
     //Populate both grids and get the computer selections
     populateGrid(player1GridCells)
     // Check the grid for cells where there are two classes of crops in a single cell...if so, start again
     let gridCheck1 = player1GridCells.filter(cell => cell.classList.contains('planted')).length
 
     while(gridCheck1 !== 17) {
-      resetGrid(player1GridCells)
+      resetGrid(1, player1GridCells)
       populateGrid(player1GridCells)
       gridCheck1 = player1GridCells.filter(cell => cell.classList.contains('planted')).length
     }
 
-    resetGrid(player2GridCells)
+    resetGrid(2, player2GridCells)
     populateGrid(player2GridCells)
     // Check the grid for cells where there are two classes of crops in a single cell...if so, start again
     let gridCheck2 = player2GridCells.filter(cell => cell.classList.contains('planted')).length
     while(gridCheck2 !== 17) {
-      resetGrid(player2GridCells)
+      resetGrid(2, player2GridCells)
       populateGrid(player2GridCells)
       gridCheck2 = player2GridCells.filter(cell => cell.classList.contains('planted')).length
 

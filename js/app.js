@@ -5,7 +5,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const changeCrops = document.querySelector('#changeCrops')
   const startBtn = document.querySelector('#start')
   const scoreBoardPlayer1 = document.querySelector('.scoreBoardPlayer1 ul')
-  const scoreBoardPlayer2 = document.querySelector('.scoreBoardPlayer1 ul')
+  const scoreBoardPlayer2 = document.querySelector('.scoreBoardPlayer2 ul')
 
   let validHorizontalStartCells = []
   let validVerticalStartCells = []
@@ -39,14 +39,39 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+
   createPlayerGrid(1, player1Grid)
   createPlayerGrid(2, player2Grid)
 
-  function setUpGame() {
+  function resetGrid(gridCells) {
+    // Create grids
+    gridCells.forEach(cell => cell.className='empty')
+  }
 
+
+  function setUpGame() {
+    resetGrid(player1GridCells)
     //Populate both grids and get the computer selections
     populateGrid(player1GridCells)
+    // Check the grid for cells where there are two classes of crops in a single cell...if so, start again
+    let gridCheck1 = player1GridCells.filter(cell => cell.classList.contains('planted')).length
+
+    while(gridCheck1 !== 17) {
+      resetGrid(player1GridCells)
+      populateGrid(player1GridCells)
+      gridCheck1 = player1GridCells.filter(cell => cell.classList.contains('planted')).length
+    }
+
+    resetGrid(player2GridCells)
     populateGrid(player2GridCells)
+    // Check the grid for cells where there are two classes of crops in a single cell...if so, start again
+    let gridCheck2 = player2GridCells.filter(cell => cell.classList.contains('planted')).length
+    while(gridCheck2 !== 17) {
+      resetGrid(player2GridCells)
+      populateGrid(player2GridCells)
+      gridCheck2 = player2GridCells.filter(cell => cell.classList.contains('planted')).length
+
+    }
     getPlayer2Selection()
   }
 
@@ -172,10 +197,6 @@ document.addEventListener('DOMContentLoaded', () => {
       // plant the crops!
     } // end of for loop
 
-    // Check the grid for cells where there are two classes of crops in a single cell...if so, start again
-      // const gridCheck = gridCells.filter(cell => cell.classList.contains('planted'))
-        // console.log('is this code running?')
-
   } //end of function
 
 
@@ -255,7 +276,7 @@ document.addEventListener('DOMContentLoaded', () => {
       console.log(`hurrah - you destroyed the whole of ${hitCrop}`)
       const cropReport = document.createElement('li')
       scoreBoard.appendChild(cropReport)
-      cropReport.innerHTML = `${hitCrop}: Destroyed!`
+      cropReport.innerHTML = `${hitCrop}: Destroyed!${player}`
     }
     // check to see if all crops have been destroyed (end of game!!)
     if(cropsArray.every(crop => cropsDestroyed[crop])) {

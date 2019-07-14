@@ -4,9 +4,27 @@ document.addEventListener('DOMContentLoaded', () => {
   const player2Grid = document.querySelector('.player2Grid')
   const changeCrops = document.querySelector('#changeCrops')
   const startBtn = document.querySelector('#start')
+  const scoreBoard = document.querySelector('.scoreBoard')
 
+  let validHorizontalStartCells = []
+  let validVerticalStartCells = []
+
+  const crops = {
+    crop1: 5,
+    crop2: 4,
+    crop3: 3,
+    crop4: 3,
+    crop5: 2
+  }
   const gridWidth = 10
   let orientation = null
+  let player2SelectedCells
+  let goCount = 0
+  const arrayHitsPlayer1 = []
+  const arrayHitsPlayer2 = []
+  const cropsDestroyedPlayer1 = {}
+  const cropsDestroyedPlayer2 = {}
+  const cropsArray = Object.keys(crops)
 
   //Create player grid(s)
 
@@ -42,16 +60,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   //   Let the computer choose either vertical or horizontal orientation for the crops at random.
 
-  let validHorizontalStartCells = []
-  let validVerticalStartCells = []
 
-  const crops = {
-    crop1: 5,
-    crop2: 4,
-    crop3: 3,
-    crop4: 3,
-    crop5: 2
-  }
 
 
   function setCropOrientation() {
@@ -203,78 +212,80 @@ document.addEventListener('DOMContentLoaded', () => {
   // console.log(validVerticalStartCells)
 
 
-  // **********************Play the Game ********************************
-
-  const player2SelectedCells = player1GridCells
+  // **********************Play the Game ******************************
 
   function getPlayer2Selection () {
     // This function is run at setup - it contains the cells that the computer will select
     // For MVP - simply shuffle the cells into a random order by putting each element in object with random sort key, then sorting using the random key then unmap to get the original objects
-
-    player2SelectedCells
+    player2SelectedCells = player1GridCells
       .map((a) => ({sort: Math.random(), value: a}))
       .sort((a, b) => a.sort - b.sort)
       .map((a) => a.value)
-    // console.log(player2SelectedCells)
+    return player2SelectedCells
   }
 
 
   // Play the game!! Player 1 picks a cell, then computer has a turn and so on...
 
-  let goCount = 0
-  const arrayHits = []
-  const cropsDestroyedPlayer1 = {}
-  const cropsDestroyedPlayer2 = {}
+  function playerHitRoutine (targetCell, player) {
+    // const targetGrid = `${player}GridCells`
+    let arrayHits
+    let cropsDestroyed
+    if(player === 'player1') {
+      arrayHits = arrayHitsPlayer1
+      cropsDestroyed = cropsDestroyedPlayer1
+    } else if (player === 'player2'){
+      arrayHits = arrayHitsPlayer2
+      cropsDestroyed = cropsDestroyedPlayer2
+    }
 
-  function userGo () {
-
-    const cropsArray = Object.keys(crops)
-
-    if(!this.classList.contains('hit') && !this.classList.contains('miss')) {
-
-      //hit loop starts here
-      if(this.classList.contains('planted')) {
-        this.classList.add('hit')
-        arrayHits.push(this)
-        console.log(arrayHits)
-
-        // check the crop
-
-        const classList = Array.from(this.classList)
-        const hitCrop = classList.filter(crop => cropsArray.includes(crop))
-        console.log(hitCrop)
-        // check to see if this crop type has been completely destroyed
-        if(arrayHits.filter(cell => cell.classList.contains(hitCrop)).length === crops[hitCrop]) {
-          cropsDestroyedPlayer1[hitCrop] = true
-          console.log(cropsDestroyedPlayer1)
-          console.log(`hurrah - you destroyed the whole of ${hitCrop}`)
-        }
-
-        // check to see if all crops have been destroyed (end of game!!)
-
-        if(cropsArray.every(crop => cropsDestroyedPlayer1[crop])) {
-          console.log('GAME OVER!!!!!  You win the GAME!!!!!@')
-        }
-
-        computerGo()
-        goCount++
-        // hit loop ends here ...
-      } else {
-        this.classList.add('miss')
-        computerGo()
-        goCount++
+    if(targetCell.classList.contains('planted')) {
+      targetCell.classList.add('hit')
+      arrayHits.push(targetCell)
+      // console.log(arrayHits)
+      // check the crop
+      const classList = Array.from(targetCell.classList)
+      const hitCrop = classList.filter(crop => cropsArray.includes(crop))
+      console.log(hitCrop)
+      // check to see if this crop type has been completely destroyed
+      if(arrayHits.filter(cell => cell.classList.contains(hitCrop)).length === crops[hitCrop]) {
+        cropsDestroyed[hitCrop] = true
+        console.log(cropsDestroyedPlayer1)
+        console.log(`hurrah - you destroyed the whole of ${hitCrop}`)
+      }
+      // check to see if all crops have been destroyed (end of game!!)
+      if(cropsArray.every(crop => cropsDestroyed[crop])) {
+        console.log('GAME OVER!!!!!  You win the GAME!!!!!@')
+        scoreBoard.textContent ='GAME OVER!!!!!  You win the GAME!!!!!@'
       }
     }
-  } // don't do anything if the user has already clicked the cell
+  }
 
 
+  function userGo (e) {
+    // check that player1 has not already clicked this cell
+    if(!this.classList.contains('hit') && !this.classList.contains('miss')) {
+      //hit loop starts here
+      const targetCell = e.target
+      console.log(targetCell)
+      playerHitRoutine(targetCell, 'player1')
 
-  function computerGo () {
-    if(player2SelectedCells[goCount].classList.contains('planted')) {
-      player2SelectedCells[goCount].classList.add('hit')
+      computerGo(goCount)
+      goCount++
+
     } else {
-      player2SelectedCells[goCount].classList.add('miss')
+      this.classList.add('miss')
+      computerGo(goCount)
+      goCount++
     }
+  } // don't do anything if the user has already clicked the cells
+
+
+
+  function computerGo (goCount) {
+    // console.log(player2SelectedCells)
+    const targetCellIndex = player1GridCells.indexOf(player2SelectedCells[goCount])
+    const targetCell = player1GridCells[targetCellIndex]
   }
 
   // changeCrops.addEventListener('click', populateGrid.bind(player2GridCells))

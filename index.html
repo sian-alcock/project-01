@@ -14,18 +14,27 @@
       <h1>Crop Capers</h1>
       <p>Instructions<p>
         <button type="button" name="button" id="start">Start game</button>
-        <p class="scoreBoard"> </p>
+        <div class="scoreBoards">
+          <div class="scoreBoardPlayer2">
+            <ul></ul>
+          </div>
+          <div class="scoreBoardPlayer1">
+            <ul></ul>
+          </div>
+        </div>
     </header>
     <main>
       <div class="game">
         <div class="left-column">
-          <h2>Player 1</h2>
+          <h2>Your Farm</h2>
+          <p>Uh-oh, someone's been digging....</p>
           <section class="player1Grid">
           </section>
           <button type="button" name="button" id="changeCrops">Change my crops</button>
         </div>
         <div class="right-column">
-          <h2>Player 2</h2>
+          <h2>Farmer Giles' Farm</h2>
+          <p>Click cells to find and destroy your biggest rival's crops</p>
           <section class="player2Grid">
           </section>
       </div>

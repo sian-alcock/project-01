@@ -9,7 +9,7 @@ h1, h2, p {
 .game {
 
   margin: auto;
-  padding: 50px;
+  padding: 0 50px;
   display: flex;
   justify-content: space-between;
   border: 1px solid grey;
@@ -90,7 +90,17 @@ h1, h2, p {
   }
 }
 
-#start.disabled {
-  opacity: 0.65;
-  cursor: not-allowed;
+.scoreBoards {
+margin: auto;
+display: flex;
+flex-wrap: wrap;
+justify-content: space-between;
+
+  .scoreBoards div {
+    margin: auto;
+    padding: 0;
+  }
+  // .scoreBoards p {
+  //   margin: 0;
+  // }
 }

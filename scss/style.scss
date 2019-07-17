@@ -5,13 +5,17 @@ $Background: rgba(250,250,250,0.7);
 }
 
 h1, h2, p {
-  font-family: 'Gochi Hand', cursive;
+  font-family: Helvetica;
   text-align: center;
   margin: 0;
+  padding: 4px;
+  line-height: 1.8;
 }
 
 h1 {
+  font-family: 'Gochi Hand', cursive;
   padding-top: 50px;
+  padding-bottom: 0;
   color: white;
 }
 
@@ -20,11 +24,13 @@ header {
   justify-content: space-between;
   flex-wrap: wrap;
   align-items: baseline;
-  h1, p {
+  text-align: center;
+  p {
     text-align: center;
     padding: 4px 0;
   }
   h1 {
+    text-align: center;
     font-size: 100px;
     color: gold;
   }
@@ -44,13 +50,16 @@ body {
 .game {
   width: 800px;
   margin: auto;
-  padding: 0 50px;
+  padding: 20px 50px;
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
+  background-color: white;
+  border: 1px solid grey;
+  box-shadow: 0px 3px 15px rgba(0,0,0,0.2)
 }
 
-.player1Space, .player2Space {
+.startBoard {
   margin: auto;
   display: flex;
   justify-content: center;
@@ -59,7 +68,12 @@ body {
 }
 
 .player1Space {
-  order: 1;
+  margin: auto;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  order: 2;
     // Desktop 50% width
     @media only screen and (min-width: 769px) {
         width: 50%;
@@ -67,7 +81,12 @@ body {
 }
 
 .player2Space {
-  order: 2;
+  margin: auto;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  order: 3;
     // Desktop 50% width
   @media only screen and (min-width: 769px) {
       width: 50%;
@@ -77,11 +96,18 @@ body {
 .billBoard {
   width: 100%;
   height: 100%;
-  order: 3;
+  order: 4;
   display: none;
     p{
       font-size: 50px;
     }
+}
+
+.startBoard {
+  width: 100%;
+  height: 100%;
+  order: 1;
+  margin: 0 auto;
 }
 
 .player1Grid, .player2Grid {
@@ -98,45 +124,46 @@ body {
   border: 1px solid grey;
   background-color: gold;
 }
+
 .player1Grid {
-  .crop1-carrot {
-    background-image: url('../images/crop1-carrot.png');
+  .crop1-lime {
+    background-image: url('../images/crop1-lime.png');
   }
 
-  .crop1-carrot.hit {
-    background-image: url('../images/crop1-carrot.png');
+  .crop1-lime.hit {
+    background-image: url('../images/crop1-lime.png');
   }
 
-  .crop2-seedling {
-    background-image: url('../images/crop2-seedling.png');
+  .crop2-peach {
+    background-image: url('../images/crop2-peach.png');
   }
 
-  .crop2-seedling.hit {
-    background-image: url('../images/crop2-seedling-destroyed.png');
+  .crop2-peach.hit {
+    background-image: url('../images/crop2-peach-destroyed.png');
   }
 
-  .crop3-hot-pepper {
-    background-image: url('../images/crop3-hot-pepper.png');
+  .crop3-seedling {
+    background-image: url('../images/crop3-seedling.png');
   }
 
-  .crop3-hot-pepper.hit {
-    background-image: url('../images/crop3-hot-pepper-destroyed.png');
+  .crop3-seedling.hit {
+    background-image: url('../images/crop3-seedling-destroyed.png');
   }
 
-  .crop4-lemon {
-    background-image: url('../images/crop4-lemon.png');
+  .crop4-hot-pepper {
+    background-image: url('../images/crop4-hot-pepper.png');
   }
 
-  .crop4-lemon.hit {
-    background-image: url('../images/crop4-lemon-destroyed.png');
+  .crop4-hot-pepper.hit {
+    background-image: url('../images/crop4-hot-pepper-destroyed.png');
   }
 
-  .crop5-apple-alt {
-    background-image: url('../images/crop5-apple-alt.png');
+  .crop5-carrot {
+    background-image: url('../images/crop5-carrot.png');
   }
 
-  .crop5-apple-alt.hit {
-    background-image: url('../images/crop5-apple-alt-destroyed.png');
+  .crop5-carrot.hit {
+    background-image: url('../images/crop5-carrot-destroyed.png');
   }
 
   .hit {
@@ -151,44 +178,44 @@ body {
 }
 
 .player2Grid {
-  .crop1-carrot {
+  .crop1-lime {
     border: 1px solid blue;
   }
 
-  .crop1-carrot.hit {
-    background-image: url('../images/crop1-carrot-destroyed.png');
+  .crop1-lime.hit {
+    background-image: url('../images/crop1-lime-destroyed.png');
   }
 
-  .crop2-seedling {
+  .crop2-peach {
     border: 1px solid blue;
   }
 
-  .crop2-seedling.hit {
-    background-image: url('../images/crop2-seedling-destroyed.png');
+  .crop2-peach.hit {
+    background-image: url('../images/crop2-peach-destroyed.png');
   }
 
-  .crop3-hot-pepper {
+  .crop3-seedling {
     border: 1px solid blue;
   }
 
-  .crop3-hot-pepper.hit {
-    background-image: url('../images/crop3-hot-pepper-destroyed.png');
+  .crop3-seedling.hit {
+    background-image: url('../images/crop3-seedling-destroyed.png');
   }
 
-  .crop4-lemon {
+  .crop4-hot-pepper {
     border: 1px solid blue;
   }
 
-  .crop4-lemon.hit {
-    background-image: url('../images/crop4-lemon-destroyed.png');
+  .crop4-hot-pepper.hit {
+    background-image: url('../images/crop4-hot-pepper-destroyed.png');
   }
 
-  .crop5-apple-alt {
+  .crop5-carrot {
     border: 1px solid blue;
   }
 
-  .crop5-apple-alt.hit {
-    background-image: url('../images/crop5-apple-alt-destroyed.png');
+  .crop5-carrot.hit {
+    background-image: url('../images/crop5-carrot-destroyed.png');
   }
 
   .hit {
@@ -202,35 +229,86 @@ body {
   }
 }
 
-.scoreBoardPlayer1 {
-
+.scoreBoardPlayer1, .scoreBoardPlayer2 {
+display:flex;
+flex-wrap: wrap;
+justify-content: center;
 }
 
-.scoreBoardPlayer2 {
+.scoreBoardPlayer1.crop1-lime {
+    background-image: url("../images/crop1.png");
+  }
+.scoreBoardPlayer1 .crop1-lime.hit {
+    background-image: url("../images/crop1-hit.png");
+  }
+.scoreBoardPlayer1 .crop2-peach {
+    background-image: url("../images/crop2.png");
+  }
+.scoreBoardPlayer1 .crop2-peach.hit {
+    background-image: url("../images/crop2-hit.png");
+  }
+.scoreBoardPlayer1 .crop3-seedling {
+    background-image: url("../images/crop3.png");
+  }
+.scoreBoardPlayer1 .crop3-seedling.hit {
+    background-image: url("../images/crop3-hit.png");
+  }
+.scoreBoardPlayer1 .crop4-hot-pepper {
+    background-image: url("../images/crop4.png");
+  }
+.scoreBoardPlayer1 .crop4-hot-pepper.hit {
+    background-image: url("../images/crop4-hit.png");
+  }
+.scoreBoardPlayer1 .crop5-carrot {
+    background-image: url("../images/crop5.png");
+  }
+.scoreBoardPlayer1 .crop5-carrot.hit {
+    background-image: url("../images/crop5-hit.png");
+  }
 
-}
+  .scoreBoardPlayer2 .crop1-lime {
+      background-image: url("../images/crop1.png");
+    }
+  .scoreBoardPlayer2 .crop1-lime.hit {
+      background-image: url("../images/crop1-hit.png");
+    }
+  .scoreBoardPlayer2 .crop2-peach {
+      background-image: url("../images/crop2.png");
+    }
+  .scoreBoardPlayer2 .crop2-peach.hit {
+      background-image: url("../images/crop2-hit.png");
+    }
+  .scoreBoardPlayer2 .crop3-seedling {
+      background-image: url("../images/crop3.png");
+    }
+  .scoreBoardPlayer2 .crop3-seedling.hit {
+      background-image: url("../images/crop3-hit.png");
+    }
+  .scoreBoardPlayer2 .crop4-hot-pepper {
+      background-image: url("../images/crop4.png");
+    }
+  .scoreBoardPlayer2 .crop4-hot-pepper.hit {
+      background-image: url("../images/crop4-hit.png");
+    }
+  .scoreBoardPlayer2 .crop5-carrot {
+      background-image: url("../images/crop5.png");
+    }
+  .scoreBoardPlayer2 .crop5-carrot.hit {
+      background-image: url("../images/crop5-hit.png");
+    }
 
-.fa-carrot {
-  color: orange;
-  text-decoration:line-through grey;
-}
-.fa-seedling {
-  color: green;
-}
-.fa-pepper-hot {
-  color: red;
-}
-.fa-apple-alt {
-  color: SpringGreen;
-}
-.fa-lemon {
-  color: yellow;
-}
 
 button {
   background: gold;
   color: grey;
   padding: 5px;
-  font-size: 24px;
-  // margin: 0 5px;
+  font-size: 20px;
+}
+
+#reset {
+  display: none;
+}
+
+video {
+  margin: 4px;
 }

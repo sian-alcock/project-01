@@ -2,23 +2,29 @@
   box-sizing: border-box; }
 
 h1, h2, p {
-  font-family: 'Gochi Hand', cursive;
+  font-family: Helvetica;
   text-align: center;
-  margin: 0; }
+  margin: 0;
+  padding: 4px;
+  line-height: 1.8; }
 
 h1 {
+  font-family: 'Gochi Hand', cursive;
   padding-top: 50px;
+  padding-bottom: 0;
   color: white; }
 
 header {
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
-  align-items: baseline; }
-  header h1, header p {
+  align-items: baseline;
+  text-align: center; }
+  header p {
     text-align: center;
     padding: 4px 0; }
   header h1 {
+    text-align: center;
     font-size: 100px;
     color: gold; }
 
@@ -35,12 +41,15 @@ body {
 .game {
   width: 800px;
   margin: auto;
-  padding: 0 50px;
+  padding: 20px 50px;
   display: flex;
   justify-content: space-around;
-  flex-wrap: wrap; }
+  flex-wrap: wrap;
+  background-color: white;
+  border: 1px solid grey;
+  box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.2); }
 
-.player1Space, .player2Space {
+.startBoard {
   margin: auto;
   display: flex;
   justify-content: center;
@@ -48,13 +57,23 @@ body {
   flex-direction: column; }
 
 .player1Space {
-  order: 1; }
+  margin: auto;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  order: 2; }
   @media only screen and (min-width: 769px) {
     .player1Space {
       width: 50%; } }
 
 .player2Space {
-  order: 2; }
+  margin: auto;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  order: 3; }
   @media only screen and (min-width: 769px) {
     .player2Space {
       width: 50%; } }
@@ -62,10 +81,16 @@ body {
 .billBoard {
   width: 100%;
   height: 100%;
-  order: 3;
+  order: 4;
   display: none; }
   .billBoard p {
     font-size: 50px; }
+
+.startBoard {
+  width: 100%;
+  height: 100%;
+  order: 1;
+  margin: 0 auto; }
 
 .player1Grid, .player2Grid {
   width: 300px;
@@ -80,26 +105,26 @@ body {
   border: 1px solid grey;
   background-color: gold; }
 
-.player1Grid .crop1-carrot {
-  background-image: url("../images/crop1-carrot.png"); }
-.player1Grid .crop1-carrot.hit {
-  background-image: url("../images/crop1-carrot.png"); }
-.player1Grid .crop2-seedling {
-  background-image: url("../images/crop2-seedling.png"); }
-.player1Grid .crop2-seedling.hit {
-  background-image: url("../images/crop2-seedling-destroyed.png"); }
-.player1Grid .crop3-hot-pepper {
-  background-image: url("../images/crop3-hot-pepper.png"); }
-.player1Grid .crop3-hot-pepper.hit {
-  background-image: url("../images/crop3-hot-pepper-destroyed.png"); }
-.player1Grid .crop4-lemon {
-  background-image: url("../images/crop4-lemon.png"); }
-.player1Grid .crop4-lemon.hit {
-  background-image: url("../images/crop4-lemon-destroyed.png"); }
-.player1Grid .crop5-apple-alt {
-  background-image: url("../images/crop5-apple-alt.png"); }
-.player1Grid .crop5-apple-alt.hit {
-  background-image: url("../images/crop5-apple-alt-destroyed.png"); }
+.player1Grid .crop1-lime {
+  background-image: url("../images/crop1-lime.png"); }
+.player1Grid .crop1-lime.hit {
+  background-image: url("../images/crop1-lime.png"); }
+.player1Grid .crop2-peach {
+  background-image: url("../images/crop2-peach.png"); }
+.player1Grid .crop2-peach.hit {
+  background-image: url("../images/crop2-peach-destroyed.png"); }
+.player1Grid .crop3-seedling {
+  background-image: url("../images/crop3-seedling.png"); }
+.player1Grid .crop3-seedling.hit {
+  background-image: url("../images/crop3-seedling-destroyed.png"); }
+.player1Grid .crop4-hot-pepper {
+  background-image: url("../images/crop4-hot-pepper.png"); }
+.player1Grid .crop4-hot-pepper.hit {
+  background-image: url("../images/crop4-hot-pepper-destroyed.png"); }
+.player1Grid .crop5-carrot {
+  background-image: url("../images/crop5-carrot.png"); }
+.player1Grid .crop5-carrot.hit {
+  background-image: url("../images/crop5-carrot-destroyed.png"); }
 .player1Grid .hit {
   background-color: dodgerblue;
   border: green; }
@@ -107,26 +132,26 @@ body {
   background-color: grey;
   border: green; }
 
-.player2Grid .crop1-carrot {
+.player2Grid .crop1-lime {
   border: 1px solid blue; }
-.player2Grid .crop1-carrot.hit {
-  background-image: url("../images/crop1-carrot-destroyed.png"); }
-.player2Grid .crop2-seedling {
+.player2Grid .crop1-lime.hit {
+  background-image: url("../images/crop1-lime-destroyed.png"); }
+.player2Grid .crop2-peach {
   border: 1px solid blue; }
-.player2Grid .crop2-seedling.hit {
-  background-image: url("../images/crop2-seedling-destroyed.png"); }
-.player2Grid .crop3-hot-pepper {
+.player2Grid .crop2-peach.hit {
+  background-image: url("../images/crop2-peach-destroyed.png"); }
+.player2Grid .crop3-seedling {
   border: 1px solid blue; }
-.player2Grid .crop3-hot-pepper.hit {
-  background-image: url("../images/crop3-hot-pepper-destroyed.png"); }
-.player2Grid .crop4-lemon {
+.player2Grid .crop3-seedling.hit {
+  background-image: url("../images/crop3-seedling-destroyed.png"); }
+.player2Grid .crop4-hot-pepper {
   border: 1px solid blue; }
-.player2Grid .crop4-lemon.hit {
-  background-image: url("../images/crop4-lemon-destroyed.png"); }
-.player2Grid .crop5-apple-alt {
+.player2Grid .crop4-hot-pepper.hit {
+  background-image: url("../images/crop4-hot-pepper-destroyed.png"); }
+.player2Grid .crop5-carrot {
   border: 1px solid blue; }
-.player2Grid .crop5-apple-alt.hit {
-  background-image: url("../images/crop5-apple-alt-destroyed.png"); }
+.player2Grid .crop5-carrot.hit {
+  background-image: url("../images/crop5-carrot-destroyed.png"); }
 .player2Grid .hit {
   background-color: dodgerblue;
   border: green; }
@@ -134,26 +159,81 @@ body {
   background-color: grey;
   border: green; }
 
-.fa-carrot {
-  color: orange;
-  text-decoration: line-through grey; }
+.scoreBoardPlayer1, .scoreBoardPlayer2 {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center; }
 
-.fa-seedling {
-  color: green; }
+.scoreBoardPlayer1.crop1-lime {
+  background-image: url("../images/crop1.png"); }
 
-.fa-pepper-hot {
-  color: red; }
+.scoreBoardPlayer1 .crop1-lime.hit {
+  background-image: url("../images/crop1-hit.png"); }
 
-.fa-apple-alt {
-  color: SpringGreen; }
+.scoreBoardPlayer1 .crop2-peach {
+  background-image: url("../images/crop2.png"); }
 
-.fa-lemon {
-  color: yellow; }
+.scoreBoardPlayer1 .crop2-peach.hit {
+  background-image: url("../images/crop2-hit.png"); }
+
+.scoreBoardPlayer1 .crop3-seedling {
+  background-image: url("../images/crop3.png"); }
+
+.scoreBoardPlayer1 .crop3-seedling.hit {
+  background-image: url("../images/crop3-hit.png"); }
+
+.scoreBoardPlayer1 .crop4-hot-pepper {
+  background-image: url("../images/crop4.png"); }
+
+.scoreBoardPlayer1 .crop4-hot-pepper.hit {
+  background-image: url("../images/crop4-hit.png"); }
+
+.scoreBoardPlayer1 .crop5-carrot {
+  background-image: url("../images/crop5.png"); }
+
+.scoreBoardPlayer1 .crop5-carrot.hit {
+  background-image: url("../images/crop5-hit.png"); }
+
+.scoreBoardPlayer2 .crop1-lime {
+  background-image: url("../images/crop1.png"); }
+
+.scoreBoardPlayer2 .crop1-lime.hit {
+  background-image: url("../images/crop1-hit.png"); }
+
+.scoreBoardPlayer2 .crop2-peach {
+  background-image: url("../images/crop2.png"); }
+
+.scoreBoardPlayer2 .crop2-peach.hit {
+  background-image: url("../images/crop2-hit.png"); }
+
+.scoreBoardPlayer2 .crop3-seedling {
+  background-image: url("../images/crop3.png"); }
+
+.scoreBoardPlayer2 .crop3-seedling.hit {
+  background-image: url("../images/crop3-hit.png"); }
+
+.scoreBoardPlayer2 .crop4-hot-pepper {
+  background-image: url("../images/crop4.png"); }
+
+.scoreBoardPlayer2 .crop4-hot-pepper.hit {
+  background-image: url("../images/crop4-hit.png"); }
+
+.scoreBoardPlayer2 .crop5-carrot {
+  background-image: url("../images/crop5.png"); }
+
+.scoreBoardPlayer2 .crop5-carrot.hit {
+  background-image: url("../images/crop5-hit.png"); }
 
 button {
   background: gold;
   color: grey;
   padding: 5px;
-  font-size: 24px; }
+  font-size: 20px; }
+
+#reset {
+  display: none; }
+
+video {
+  margin: 4px; }
 
 /*# sourceMappingURL=style.css.map */

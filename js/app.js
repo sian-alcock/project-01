@@ -4,25 +4,28 @@ document.addEventListener('DOMContentLoaded', () => {
   const player2Grid = document.querySelector('.player2Grid')
   const changeCrops = document.querySelector('#changeCrops')
   const startBtn = document.querySelector('#start')
+  const resetBtn = document.querySelector('#reset')
   // const scoreBoardPlayer1 = document.querySelector('.scoreBoardPlayer1')
   // const scoreBoardPlayer2 = document.querySelector('.scoreBoardPlayer2')
-  const scoreBoardPlayer1Images = Array.from(document.querySelectorAll('.scoreBoardPlayer1 img'))
-  const scoreBoardPlayer2Images = Array.from(document.querySelectorAll('.scoreBoardPlayer2 img'))
+  const scoreBoardPlayer1Images = Array.from(document.querySelectorAll('.scoreBoardPlayer1 div'))
+  const scoreBoardPlayer2Images = Array.from(document.querySelectorAll('.scoreBoardPlayer2 div'))
   const billBoard = document.querySelector('.billBoard')
   const player1Space = document.querySelector('.player1Space')
   const player2Space = document.querySelector('.player2Space')
+  const startBoard = document.querySelector('.startBoard')
+  const video = document.querySelector('video')
+  const startBoardText = document.querySelector('.startBoard p')
+  const gameArea = document.querySelector('.game')
 
-  console.log(scoreBoardPlayer1Images)
-  console.log(scoreBoardPlayer2Images)
 
   let validHorizontalStartCells = []
   let validVerticalStartCells = []
   const crops = {
-    'crop1-carrot': 5,
-    'crop2-seedling': 4,
-    'crop3-hot-pepper': 3,
-    'crop4-lemon': 3,
-    'crop5-apple-alt': 2
+    'crop1-lime': 5,
+    'crop2-peach': 4,
+    'crop3-seedling': 3,
+    'crop4-hot-pepper': 3,
+    'crop5-carrot': 2
   }
   const gridWidth = 10
   let orientation = null
@@ -33,6 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let cropsDestroyedPlayer1 = {}
   let cropsDestroyedPlayer2 = {}
   const cropsArray = Object.keys(crops)
+  let gameOver = ''
 
   //Create player grid(s)
 
@@ -51,50 +55,55 @@ document.addEventListener('DOMContentLoaded', () => {
   createPlayerGrid(1, player1Grid)
   createPlayerGrid(2, player2Grid)
 
-  function resetGrid(player, gridCells) {
-    // Create grids
-
-    let arrayHits
-    let cropsDestroyed
-    // let scoreBoard
-
-    if(player === 1) {
-      // scoreBoard = scoreBoardPlayer1
-      arrayHits = arrayHitsPlayer1
-      cropsDestroyed = cropsDestroyedPlayer1
-    } else if(player === 2){
-      // scoreBoard = scoreBoardPlayer2
-      arrayHits = arrayHitsPlayer2
-      cropsDestroyed = cropsDestroyedPlayer2
-    }
-
-    arrayHits = []
-    cropsDestroyed = {}
-    gridCells.forEach(cell => cell.className='empty')
-    // scoreBoard.innerHTML = '<ul></ul>'
-    goCount = 0
+  function start(){
+    startBoardText.style.display = 'none'
+    startBtn.style.display = 'none'
+    video.style.width = '100%'
+    video.style.height = '100%'
+    video.play()
+    setTimeout(setUpGame, 7000)
   }
 
-
   function setUpGame() {
-    resetGrid(1, player1GridCells)
+    player1Space.style.display = 'flex'
+    player2Space.style.display = 'flex'
+    startBoard.style.display = 'none'
+    billBoard.style.display = 'none'
+    player1Space.style.order = 1
+    player2Space.style.order = 2
+    startBoard.style.order = 3
+    billBoard.style.order = 4
+    resetBtn.style.display = 'unset'
+    gameOver.innerHTML = ''
+
+
+
+    arrayHitsPlayer1 = []
+    arrayHitsPlayer2 = []
+    cropsDestroyedPlayer1 =[]
+    cropsDestroyedPlayer2 =[]
+
+    player1GridCells.forEach(cell => cell.className='empty')
+    player2GridCells.forEach(cell => cell.className='empty')
+    goCount = 0
+
     //Populate both grids and get the computer selections
     populateGrid(player1GridCells)
-    // Check the grid for cells where there are two classes of crops in a single cell...if so, start again
+    // Check the grid - if overlaps, go again
     let gridCheck1 = player1GridCells.filter(cell => cell.classList.contains('planted')).length
 
     while(gridCheck1 !== 17) {
-      resetGrid(1, player1GridCells)
+      player1GridCells.forEach(cell => cell.className='empty')
       populateGrid(player1GridCells)
       gridCheck1 = player1GridCells.filter(cell => cell.classList.contains('planted')).length
     }
 
-    resetGrid(2, player2GridCells)
+    player2GridCells.forEach(cell => cell.className='empty')
     populateGrid(player2GridCells)
-    // Check the grid for cells where there are two classes of crops in a single cell...if so, start again
+    // Check the grid - if overlaps, go again
     let gridCheck2 = player2GridCells.filter(cell => cell.classList.contains('planted')).length
     while(gridCheck2 !== 17) {
-      resetGrid(2, player2GridCells)
+      player2GridCells.forEach(cell => cell.className='empty')
       populateGrid(player2GridCells)
       gridCheck2 = player2GridCells.filter(cell => cell.classList.contains('planted')).length
 
@@ -515,21 +524,15 @@ document.addEventListener('DOMContentLoaded', () => {
     if(arrayHits.filter(cell => cell.classList.contains(hitCrop)).length === crops[hitCrop]) {
       cropsDestroyed[hitCrop] = true
 
-      const targetScoreBoardImage = scoreBoardImages.filter(image => image.classList.contains(`${hitCrop}`))
-      targetScoreBoardImage.src=`images/${hitCrop}-hit.png`
-
+      const targetScoreBoardImage = scoreBoardImages.filter(div => div.classList.contains(`${hitCrop}`))
       console.log(targetScoreBoardImage)
-      console.log(hitCrop)
+      targetScoreBoardImage[0].classList.add('hit')
 
-      // ('src', `images/${hitCrop}-hit.png`)
-      // const cropReport = document.createElement('li')
-      // scoreBoard.appendChild(cropReport)
-      // cropReport.innerHTML = `${hitCrop}: Destroyed!${player}`
 
     }
     // check to see if all crops have been destroyed (end of game!!)
     if(cropsArray.every(crop => cropsDestroyed[crop])) {
-      const gameOver = document.createElement('p')
+      gameOver = document.createElement('p')
       billBoard.appendChild(gameOver)
       gameOver.innerHTML =`GAME OVER!!!!!  <br>${player} wins the GAME!!!!!@`
       billBoard.style.order = 1
@@ -574,7 +577,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
   // changeCrops.addEventListener('click', populateGrid.bind(player2GridCells))
-  startBtn.addEventListener('click', setUpGame)
+  startBtn.addEventListener('click', start)
+  resetBtn.addEventListener('click', setUpGame)
   player2GridCells.forEach(cell => cell.addEventListener('click', userGo))
 
 

@@ -12,33 +12,38 @@
   <body>
     <header>
       <h1>Crop Capers</h1>
-        <button type="button" name="button" id="start">Start / reset game</button>
+        <button type="button" name="button" id="reset">Start again</button>
     </header>
     <main>
       <div class="game">
+        <div class="startBoard">
+          <button type="button" name="button" id="start">Start game</button>
+          <p>Every year, you enter your best fruit and vegetable crops for prizes at the county fair.  Your biggest rival - Farmer Giles - has turned ruthless and is destroying your crops to scupper your chances.  Find and destroy Farmer Giles' crops before he destroys yours!!</p>
+          <video width="300" height="300px" src="movies/cropcapers-coolmovie.m4v">
+          </video>
+        </div>
         <div class="player1Space">
           <div class="scoreBoardPlayer1">
-            <img class="crop1-carrot" src="images/crop2.png">
-            <img class="crop2-seedling" src="images/crop1.png">
-            <img class="crop3-hot-pepper" src="images/crop3.png">
-            <img class="crop4-lemon" src="images/crop4.png">
-            <img class="crop5-apple-alt" src="images/crop5.png">
+            <div class="crop1-lime"></div>
+            <div class="crop2-peach"></div>
+            <div class="crop3-seedling"></div>
+            <div class="crop4-hot-pepper"></div>
+            <div class="crop5-carrot"></div>
           </div>
           <h2>Your Farm</h2>
           <p>Uh-oh, someone's been digging....</p>
           <section class="player1Grid">
           </section>
-          <!-- <button type="button" name="button" id="changeCrops">Change my crops</button> -->
         </div>
         <div class="billBoard">
         </div>
-        <div class="player2Space">
+      <div class="player2Space">
           <div class="scoreBoardPlayer2">
-            <img class="crop1-carrot"src="images/crop2.png">
-            <img class="crop2-seedling" src="images/crop1.png">
-            <img class="crop3-hot-pepper"src="images/crop3.png">
-            <img class="crop4-lemon"src="images/crop4.png">
-            <img class="crop5-apple-alt"src="images/crop5.png">
+            <div class="crop1-lime"></div>
+            <div class="crop2-peach"></div>
+            <div class="crop3-seedling"></div>
+            <div class="crop4-hot-pepper"></div>
+            <div class="crop5-carrot"></div>
           </div>
           <h2>Farmer Giles' Farm</h2>
           <p>Click cells to find and destroy your rival's crops</p>

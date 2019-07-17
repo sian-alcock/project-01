@@ -266,7 +266,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
 
-  // **********************************************
+  // ***************************ATTEMPT AT GETTING INTELLIGENT P2 GOES*******************
   let randomMode = true
   let cycleMode = false
   let orientationMode = false
@@ -536,7 +536,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
   function computerGo (goCount) {
-    // console.log(player2SelectedCells)
+    console.log(player2SelectedCells)
     const targetCellIndex = player1GridCells.indexOf(player2SelectedCells[goCount])
     const targetCell = player1GridCells[targetCellIndex]
     if(!targetCell.classList.contains('planted')) {

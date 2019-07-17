@@ -59,7 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
       arrayHits = arrayHitsPlayer2
       cropsDestroyed = cropsDestroyedPlayer2
     }
-    
+
     arrayHits = []
     cropsDestroyed = {}
     gridCells.forEach(cell => cell.className='empty')
@@ -92,6 +92,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     }
     getPlayer2Selection()
+    // getPlayer2Goes() //This will replace the above function once it is working
   }
 
 
@@ -238,9 +239,9 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     const plantedCells = gridCells.filter(cell => cell.classList.contains('planted'))
     if(plantedCells.length < 17) {
-      console.log('This grid contains overwritten cells')
+      // console.log('This grid contains overwritten cells')
     } else {
-      console.log('This grid is pukka!!')
+      // console.log('This grid is pukka!!')
     }
   }
 
@@ -265,7 +266,216 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
 
-  // Play the game!! Player 1 picks a cell, then computer has a turn and so on...
+  // **********************************************
+  let randomMode = true
+  let cycleMode = false
+  let orientationMode = false
+  let direction = 1 // 1 is up/right -1 is down/left
+  const hitsIndexArray = []
+  let hitOrientation
+  let adjacentCellArray = []
+  let player2Goes = [] // This will replace the above variable if i get it working
+  let lastGoIndex
+  let startingOrientationIndex
+  let startingRandomHitIndex
+  let triedBothDirections = false
+
+  function getRandomCell () {
+    // Filter player1GridCells to only those that haven't already been picked
+    const remainingCells = player1GridCells.filter(cell => !player2Goes.includes(cell))
+    // pick a cell at random from remaining cells and get its data Id
+    const goCellDataId = remainingCells[Math.floor(Math.random()*(remainingCells.length))].getAttribute('data-id')
+    // set goIndex to the matching data Id in player1GridCells
+    const goIndex = player1GridCells.findIndex(div => div.dataset.id === goCellDataId)
+    return goIndex
+  }
+
+  function getPlayer2Goes() {
+    player2Goes = []
+    let goCell
+    let lastHitIndex = null
+
+    for(let i = 0; i < gridWidth*gridWidth; i++) {
+      // console.log({randomMode})
+      // console.log({cycleMode})
+      // console.log({orientationMode})
+
+      if (randomMode === true) {
+        const goIndex = getRandomCell()
+        while (goIndex === undefined) {
+          getRandomCell()
+        }
+        goCell = player1GridCells[goIndex]
+        player2Goes.push(goCell)
+        if(goCell.classList.contains('planted')) {
+          //push the indices of all hits into the hitsIndexArray
+          hitsIndexArray.push(goIndex)
+          //clear any previous adjacentCellArray
+          adjacentCellArray = []
+          // check cell to right is in grid and not already tried
+          if((goIndex + 1)%gridWidth <=9 && !player2Goes.includes(player1GridCells[goIndex + 1])) {
+            adjacentCellArray.push(player1GridCells[goIndex + 1])
+          }
+          // check cell below is in grid and not already tried
+          if((goIndex + gridWidth)<=99  && !player2Goes.includes(player1GridCells[goIndex + gridWidth])) {
+            adjacentCellArray.push(player1GridCells[goIndex + gridWidth])
+          }
+          // check cell to left is in grid and not already tried
+          if((goIndex - 1)%gridWidth >=0 && !player2Goes.includes(player1GridCells[goIndex - 1])) {
+            adjacentCellArray.push(player1GridCells[goIndex - 1])
+          }
+          // check cell above is in grid and not already tried
+          if((goIndex - gridWidth) > 0  && !player2Goes.includes(player1GridCells[goIndex - gridWidth])) {
+            adjacentCellArray.push(player1GridCells[goIndex - gridWidth])
+          }
+          console.log(goCell)
+          console.log(adjacentCellArray)
+          randomMode = false
+          cycleMode = true
+          lastHitIndex = hitsIndexArray[hitsIndexArray.length-1]
+        }
+        lastGoIndex = goIndex
+      }
+
+
+      if(cycleMode === true) {
+        // if array is empty - pick a cell at random and return to random mode
+        if(adjacentCellArray && adjacentCellArray.length){
+          goCell = adjacentCellArray[adjacentCellArray.length-1]
+          adjacentCellArray.pop()
+          player2Goes.push(goCell)
+          const goIndex = player1GridCells.indexOf(goCell)
+
+          if(goCell.classList.contains('planted')) {
+            //push the indices of all hits into the hitsIndexArray
+            hitsIndexArray.push(goIndex)
+            console.log('In cycle mode and hit')
+            console.log({goIndex})
+            //compare last hit index with current index to identify orientation
+            if(hitsIndexArray[hitsIndexArray.length-2] % gridWidth === hitsIndexArray[hitsIndexArray.length-1] % gridWidth) {
+              orientation = 'vertical'
+            } else if (hitsIndexArray[hitsIndexArray.length-2] % gridWidth === hitsIndexArray[hitsIndexArray.length-1] % gridWidth - 1 || lastHitIndex === goIndex + 1) {
+              orientation = 'horizontal'
+            }
+            // identify best starting direction - if last hit higher index then direction up/right (1)
+            if(hitsIndexArray[hitsIndexArray.length-2] > hitsIndexArray[hitsIndexArray.length-1]) {
+              direction = 1
+            } else {
+              direction = -1
+            }
+            cycleMode = false
+            orientationMode = true
+            startingRandomHitIndex = hitsIndexArray[hitsIndexArray.length-1]
+            console.log({orientationMode})
+            console.log(orientation)
+            console.log({startingRandomHitIndex})
+          }
+        }
+      }
+
+      if(orientationMode === true) {
+
+        // use new function checkCellInGrid(cellIndex)
+
+        // need to include direction in the targeting of next cell to try eg
+
+        // direction 1 - endcellUpRight
+
+        lastHitIndex = hitsIndexArray[hitsIndexArray.length-1]
+        // Identify the two cells to the right/left or top/bottom of the selection
+        let nextCellIndex
+        let nextCell2Index
+        // determine next cell to try
+        switch (true) {
+          // initial direction is going up
+          case orientation === 'vertical' && direction === 1:
+            nextCellIndex = lastHitIndex - gridWidth
+            nextCell2Index = startingRandomHitIndex + gridWidth
+            break
+          // initial direction is going down
+          case orientation === 'vertical' && direction === -1:
+            nextCellIndex = lastHitIndex + gridWidth
+            nextCell2Index = startingRandomHitIndex - gridWidth
+            break
+          // initial direction is going right
+          case orientation === 'horizontal' && direction === 1:
+            nextCellIndex = lastHitIndex + 1
+            nextCell2Index = startingRandomHitIndex - 1
+            break
+          // initial direction is going left
+          case orientation === 'horizontal' && direction === -1:
+            nextCellIndex = lastHitIndex - 1
+            nextCell2Index = startingRandomHitIndex + 1
+            break
+        }
+
+        // const nextCell = player1GridCells[nextCellIndex]
+
+        // Sits in the grid and not already selected and not a hit
+        if(!player2Goes.includes(player1GridCells[nextCellIndex])
+        && (!player1GridCells[nextCellIndex].classList.contains('planted'))
+        &&(direction === -1 && player1GridCells[nextCellIndex + 1] % gridWidth !== 0)
+         &&(direction === 1 && player1GridCells[nextCellIndex-1] % gridWidth !== gridWidth - 1)
+         && (direction === -1 && player1GridCells[nextCellIndex+gridWidth] < 99)
+         && (direction === 1 && player1GridCells[nextCellIndex-gridWidth] > 0)) {
+          //select the cell as player 2 go and then reverse
+          goCell = player1GridCells[nextCellIndex]
+          if(!triedBothDirections) {
+            direction = -direction
+            triedBothDirections = true
+          }
+          // else if the above ccontains a 'hit' then select the go but don't reverse
+        } else if (player1GridCells[nextCellIndex].classList.contains('planted')) {
+          goCell = player1GridCells[nextCellIndex]
+
+          // else - since the computer is unable to go in the first direction, reverse direction and try nextCell2
+
+        } else {
+          if(!triedBothDirections) {
+            direction = -direction
+            triedBothDirections = true
+          }
+
+          if(!player2Goes.includes(player1GridCells[nextCell2Index])
+              &&(direction === -1 && player1GridCells[nextCell2Index + 1] % gridWidth !== 0)
+               &&(direction === 1 && player1GridCells[nextCell2Index-1] % gridWidth !== gridWidth - 1)
+               && (direction === -1 && player1GridCells[nextCell2Index+gridWidth] < 99)
+               && (direction === 1 && player1GridCells[nextCell2Index-gridWidth] > 0)) {
+            goCell = player1GridCells[nextCell2Index]
+          }
+        }
+
+        // if the above conditions do not produce a valid go, then set the mode back to randomMode
+        if(goCell === undefined) {
+          orientationMode = false
+          randomMode = true
+          triedBothDirections = false
+        }
+
+
+        const goIndex = player1GridCells.indexOf(goCell)
+        player2Goes.push(goCell)
+        if(goCell.classList.contains('planted')) {
+          //push the indices of all hits into the hitsIndexArray
+          hitsIndexArray.push(goIndex)
+        }
+      }
+
+    }
+    console.log(player2Goes)
+    console.log(hitsIndexArray)
+
+    //Check that the player2Goes array includes all the cells from player1GridCells
+    if(player1GridCells.every(goCell => player2Goes.includes(goCell))) {
+      console.log('Yup all the cells are present')
+    }
+  }
+
+  function checkCellInGrid(cellIndex) {
+    if(cellIndex % gridWidth > 0 && cellIndex % gridWidth < gridWidth && cellIndex < (gridWidth*gridWidth-1) && cellIndex > 0) {
+      return true
+    }
+  }
 
   function playerHitRoutine (targetCell, player) {
     // const targetGrid = `${player}GridCells`
@@ -336,16 +546,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+
+
   // changeCrops.addEventListener('click', populateGrid.bind(player2GridCells))
   startBtn.addEventListener('click', setUpGame)
   player2GridCells.forEach(cell => cell.addEventListener('click', userGo))
-
-
-
-
-
-
-
 
 
 }) //End of DOMContentLoaded

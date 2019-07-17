@@ -4,17 +4,25 @@ document.addEventListener('DOMContentLoaded', () => {
   const player2Grid = document.querySelector('.player2Grid')
   const changeCrops = document.querySelector('#changeCrops')
   const startBtn = document.querySelector('#start')
-  const scoreBoardPlayer1 = document.querySelector('.scoreBoardPlayer1 ul')
-  const scoreBoardPlayer2 = document.querySelector('.scoreBoardPlayer2 ul')
+  // const scoreBoardPlayer1 = document.querySelector('.scoreBoardPlayer1')
+  // const scoreBoardPlayer2 = document.querySelector('.scoreBoardPlayer2')
+  const scoreBoardPlayer1Images = Array.from(document.querySelectorAll('.scoreBoardPlayer1 img'))
+  const scoreBoardPlayer2Images = Array.from(document.querySelectorAll('.scoreBoardPlayer2 img'))
+  const billBoard = document.querySelector('.billBoard')
+  const player1Space = document.querySelector('.player1Space')
+  const player2Space = document.querySelector('.player2Space')
+
+  console.log(scoreBoardPlayer1Images)
+  console.log(scoreBoardPlayer2Images)
 
   let validHorizontalStartCells = []
   let validVerticalStartCells = []
   const crops = {
-    crop1: 5,
-    crop2: 4,
-    crop3: 3,
-    crop4: 3,
-    crop5: 2
+    'crop1-carrot': 5,
+    'crop2-seedling': 4,
+    'crop3-hot-pepper': 3,
+    'crop4-lemon': 3,
+    'crop5-apple-alt': 2
   }
   const gridWidth = 10
   let orientation = null
@@ -48,14 +56,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     let arrayHits
     let cropsDestroyed
-    let scoreBoard
+    // let scoreBoard
 
     if(player === 1) {
-      scoreBoard = scoreBoardPlayer1
+      // scoreBoard = scoreBoardPlayer1
       arrayHits = arrayHitsPlayer1
       cropsDestroyed = cropsDestroyedPlayer1
     } else if(player === 2){
-      scoreBoard = scoreBoardPlayer2
+      // scoreBoard = scoreBoardPlayer2
       arrayHits = arrayHitsPlayer2
       cropsDestroyed = cropsDestroyedPlayer2
     }
@@ -63,7 +71,7 @@ document.addEventListener('DOMContentLoaded', () => {
     arrayHits = []
     cropsDestroyed = {}
     gridCells.forEach(cell => cell.className='empty')
-    scoreBoard.innerHTML = '<ul></ul>'
+    // scoreBoard.innerHTML = '<ul></ul>'
     goCount = 0
   }
 
@@ -223,6 +231,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function plantCrops(orientation, crop, cropLength, randomCellDataId, gridCells) {
     const randomCellIndex = gridCells.findIndex(div => div.dataset.id === randomCellDataId)
+
     if(orientation === 'horizontal') {
       let i = 0
       while (i < cropLength) {
@@ -481,16 +490,19 @@ document.addEventListener('DOMContentLoaded', () => {
     // const targetGrid = `${player}GridCells`
     let arrayHits
     let cropsDestroyed
-    let scoreBoard
+    // let scoreBoard
+    let scoreBoardImages
 
     if(player === 'player1') {
       arrayHits = arrayHitsPlayer1
       cropsDestroyed = cropsDestroyedPlayer1
-      scoreBoard = scoreBoardPlayer1
+      // scoreBoard = scoreBoardPlayer1
+      scoreBoardImages = scoreBoardPlayer1Images
     } else if (player === 'player2'){
       arrayHits = arrayHitsPlayer2
       cropsDestroyed = cropsDestroyedPlayer2
-      scoreBoard = scoreBoardPlayer2
+      // scoreBoard = scoreBoardPlayer2
+      scoreBoardImages = scoreBoardPlayer2Images
     }
     targetCell.classList.add('hit')
     arrayHits.push(targetCell)
@@ -502,15 +514,28 @@ document.addEventListener('DOMContentLoaded', () => {
     // check to see if this crop type has been completely destroyed
     if(arrayHits.filter(cell => cell.classList.contains(hitCrop)).length === crops[hitCrop]) {
       cropsDestroyed[hitCrop] = true
-      console.log(`hurrah - you destroyed the whole of ${hitCrop}`)
-      const cropReport = document.createElement('li')
-      scoreBoard.appendChild(cropReport)
-      cropReport.innerHTML = `${hitCrop}: Destroyed!${player}`
+
+      const targetScoreBoardImage = scoreBoardImages.filter(image => image.classList.contains(`${hitCrop}`))
+      targetScoreBoardImage.src=`images/${hitCrop}-hit.png`
+
+      console.log(targetScoreBoardImage)
+      console.log(hitCrop)
+
+      // ('src', `images/${hitCrop}-hit.png`)
+      // const cropReport = document.createElement('li')
+      // scoreBoard.appendChild(cropReport)
+      // cropReport.innerHTML = `${hitCrop}: Destroyed!${player}`
+
     }
     // check to see if all crops have been destroyed (end of game!!)
     if(cropsArray.every(crop => cropsDestroyed[crop])) {
-      console.log('GAME OVER!!!!!  You win the GAME!!!!!@')
-      scoreBoard.innerHTML ='GAME OVER!!!!!  You win the GAME!!!!!@'
+      const gameOver = document.createElement('p')
+      billBoard.appendChild(gameOver)
+      gameOver.innerHTML =`GAME OVER!!!!!  <br>${player} wins the GAME!!!!!@`
+      billBoard.style.order = 1
+      billBoard.style.display = 'unset'
+      player1Space.style.display = 'none'
+      player2Space.style.display = 'none'
     }
 
   }

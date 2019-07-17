@@ -1,36 +1,56 @@
+$Background: rgba(250,250,250,0.7);
+
 * {
   box-sizing: border-box;
 }
 
 h1, h2, p {
-  font-family: sunflower, sans-serif;
+  font-family: 'Gochi Hand', cursive;
   text-align: center;
   margin: 0;
 }
 
 h1 {
   padding-top: 50px;
+  color: white;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  align-items: baseline;
+  h1, p {
+    text-align: center;
+    padding: 4px 0;
+  }
+  h1 {
+    font-size: 100px;
+    color: gold;
+  }
 }
 
 body {
   margin: 0 auto;
+  background-color: black;
   background-image: url('../images/background.png');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+  max-width: 100vw;
+  padding: 10px;
 }
 
 .game {
+  width: 800px;
   margin: auto;
   padding: 0 50px;
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
-  border: 1px solid grey;
 }
 
 .player1Space, .player2Space {
-  border: 1px solid grey;
   margin: auto;
   display: flex;
   justify-content: center;
@@ -38,11 +58,30 @@ body {
   flex-direction: column;
 }
 
-.billBoard {
-  width: 200px;
-  height: 200px;
-  border: 1px solid green;
+.player1Space {
+  order: 1;
+    // Desktop 50% width
+    @media only screen and (min-width: 769px) {
+        width: 50%;
+    }
+}
 
+.player2Space {
+  order: 2;
+    // Desktop 50% width
+  @media only screen and (min-width: 769px) {
+      width: 50%;
+  }
+}
+
+.billBoard {
+  width: 100%;
+  height: 100%;
+  order: 3;
+  display: none;
+    p{
+      font-size: 50px;
+    }
 }
 
 .player1Grid, .player2Grid {
@@ -50,35 +89,56 @@ body {
   height: 300px;
   display: flex;
   flex-wrap: wrap;
-
+  padding: 0 5px 20px 0;
 }
 
 .player1Grid div, .player2Grid div  {
   width: calc(100% / 10);
   height: calc(100% / 10);
   border: 1px solid grey;
+  background-color: gold;
 }
 .player1Grid {
-  .crop1 {
-    background-color: yellow;
-    // background-image: url("http://clipartmag.com/images/vegetable-drawings-3.jpg");
-    background-size: contain;
+  .crop1-carrot {
+    background-image: url('../images/crop1-carrot.png');
   }
 
-  .crop2 {
-    background-color: red;
+  .crop1-carrot.hit {
+    background-image: url('../images/crop1-carrot.png');
   }
 
-  .crop3 {
-    background-color: blue;
+  .crop2-seedling {
+    background-image: url('../images/crop2-seedling.png');
   }
 
-  .crop4 {
-    background-color: green;
+  .crop2-seedling.hit {
+    background-image: url('../images/crop2-seedling-destroyed.png');
   }
-  .crop5 {
-    background-color: purple;
+
+  .crop3-hot-pepper {
+    background-image: url('../images/crop3-hot-pepper.png');
   }
+
+  .crop3-hot-pepper.hit {
+    background-image: url('../images/crop3-hot-pepper-destroyed.png');
+  }
+
+  .crop4-lemon {
+    background-image: url('../images/crop4-lemon.png');
+  }
+
+  .crop4-lemon.hit {
+    background-image: url('../images/crop4-lemon-destroyed.png');
+  }
+
+  .crop5-apple-alt {
+    background-image: url('../images/crop5-apple-alt.png');
+  }
+
+  .crop5-apple-alt.hit {
+    background-image: url('../images/crop5-apple-alt-destroyed.png');
+  }
+
   .hit {
     background-color: dodgerblue;
     border: green;
@@ -91,24 +151,46 @@ body {
 }
 
 .player2Grid {
-  .crop1 {
-    border: 2px solid yellow;
+  .crop1-carrot {
+    border: 1px solid blue;
   }
 
-  .crop2 {
-    border: 2px solid red;
+  .crop1-carrot.hit {
+    background-image: url('../images/crop1-carrot-destroyed.png');
   }
 
-  .crop3 {
-    border: 2px solid  blue;
+  .crop2-seedling {
+    border: 1px solid blue;
   }
 
-  .crop4 {
-    border: 2px solid  green;
+  .crop2-seedling.hit {
+    background-image: url('../images/crop2-seedling-destroyed.png');
   }
-  .crop5 {
-    border: 2px solid  purple;
+
+  .crop3-hot-pepper {
+    border: 1px solid blue;
   }
+
+  .crop3-hot-pepper.hit {
+    background-image: url('../images/crop3-hot-pepper-destroyed.png');
+  }
+
+  .crop4-lemon {
+    border: 1px solid blue;
+  }
+
+  .crop4-lemon.hit {
+    background-image: url('../images/crop4-lemon-destroyed.png');
+  }
+
+  .crop5-apple-alt {
+    border: 1px solid blue;
+  }
+
+  .crop5-apple-alt.hit {
+    background-image: url('../images/crop5-apple-alt-destroyed.png');
+  }
+
   .hit {
     background-color: dodgerblue;
     border: green;
@@ -120,14 +202,35 @@ body {
   }
 }
 
-.scoreBoards {
-margin: auto;
-display: flex;
-flex-wrap: wrap;
-justify-content: space-between;
+.scoreBoardPlayer1 {
 
-  .scoreBoards div {
-    margin: auto;
-    padding: 0;
-  }
+}
+
+.scoreBoardPlayer2 {
+
+}
+
+.fa-carrot {
+  color: orange;
+  text-decoration:line-through grey;
+}
+.fa-seedling {
+  color: green;
+}
+.fa-pepper-hot {
+  color: red;
+}
+.fa-apple-alt {
+  color: SpringGreen;
+}
+.fa-lemon {
+  color: yellow;
+}
+
+button {
+  background: gold;
+  color: grey;
+  padding: 5px;
+  font-size: 24px;
+  // margin: 0 5px;
 }

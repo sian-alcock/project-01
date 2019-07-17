@@ -2,63 +2,104 @@
   box-sizing: border-box; }
 
 h1, h2, p {
-  font-family: sunflower, sans-serif;
+  font-family: 'Gochi Hand', cursive;
   text-align: center;
   margin: 0; }
 
 h1 {
-  padding-top: 50px; }
+  padding-top: 50px;
+  color: white; }
+
+header {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  align-items: baseline; }
+  header h1, header p {
+    text-align: center;
+    padding: 4px 0; }
+  header h1 {
+    font-size: 100px;
+    color: gold; }
 
 body {
   margin: 0 auto;
+  background-color: black;
   background-image: url("../images/background.png");
   background-position: center;
   background-repeat: no-repeat;
-  background-size: cover; }
+  background-size: cover;
+  max-width: 100vw;
+  padding: 10px; }
 
 .game {
+  width: 800px;
   margin: auto;
   padding: 0 50px;
   display: flex;
   justify-content: space-around;
-  flex-wrap: wrap;
-  border: 1px solid grey; }
+  flex-wrap: wrap; }
 
 .player1Space, .player2Space {
-  border: 1px solid grey;
   margin: auto;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column; }
 
+.player1Space {
+  order: 1; }
+  @media only screen and (min-width: 769px) {
+    .player1Space {
+      width: 50%; } }
+
+.player2Space {
+  order: 2; }
+  @media only screen and (min-width: 769px) {
+    .player2Space {
+      width: 50%; } }
+
 .billBoard {
-  width: 200px;
-  height: 200px;
-  border: 1px solid green; }
+  width: 100%;
+  height: 100%;
+  order: 3;
+  display: none; }
+  .billBoard p {
+    font-size: 50px; }
 
 .player1Grid, .player2Grid {
   width: 300px;
   height: 300px;
   display: flex;
-  flex-wrap: wrap; }
+  flex-wrap: wrap;
+  padding: 0 5px 20px 0; }
 
 .player1Grid div, .player2Grid div {
   width: calc(100% / 10);
   height: calc(100% / 10);
-  border: 1px solid grey; }
+  border: 1px solid grey;
+  background-color: gold; }
 
-.player1Grid .crop1 {
-  background-color: yellow;
-  background-size: contain; }
-.player1Grid .crop2 {
-  background-color: red; }
-.player1Grid .crop3 {
-  background-color: blue; }
-.player1Grid .crop4 {
-  background-color: green; }
-.player1Grid .crop5 {
-  background-color: purple; }
+.player1Grid .crop1-carrot {
+  background-image: url("../images/crop1-carrot.png"); }
+.player1Grid .crop1-carrot.hit {
+  background-image: url("../images/crop1-carrot.png"); }
+.player1Grid .crop2-seedling {
+  background-image: url("../images/crop2-seedling.png"); }
+.player1Grid .crop2-seedling.hit {
+  background-image: url("../images/crop2-seedling-destroyed.png"); }
+.player1Grid .crop3-hot-pepper {
+  background-image: url("../images/crop3-hot-pepper.png"); }
+.player1Grid .crop3-hot-pepper.hit {
+  background-image: url("../images/crop3-hot-pepper-destroyed.png"); }
+.player1Grid .crop4-lemon {
+  background-image: url("../images/crop4-lemon.png"); }
+.player1Grid .crop4-lemon.hit {
+  background-image: url("../images/crop4-lemon-destroyed.png"); }
+.player1Grid .crop5-apple-alt {
+  background-image: url("../images/crop5-apple-alt.png"); }
+.player1Grid .crop5-apple-alt.hit {
+  background-image: url("../images/crop5-apple-alt-destroyed.png"); }
 .player1Grid .hit {
   background-color: dodgerblue;
   border: green; }
@@ -66,16 +107,26 @@ body {
   background-color: grey;
   border: green; }
 
-.player2Grid .crop1 {
-  border: 2px solid yellow; }
-.player2Grid .crop2 {
-  border: 2px solid red; }
-.player2Grid .crop3 {
-  border: 2px solid  blue; }
-.player2Grid .crop4 {
-  border: 2px solid  green; }
-.player2Grid .crop5 {
-  border: 2px solid  purple; }
+.player2Grid .crop1-carrot {
+  border: 1px solid blue; }
+.player2Grid .crop1-carrot.hit {
+  background-image: url("../images/crop1-carrot-destroyed.png"); }
+.player2Grid .crop2-seedling {
+  border: 1px solid blue; }
+.player2Grid .crop2-seedling.hit {
+  background-image: url("../images/crop2-seedling-destroyed.png"); }
+.player2Grid .crop3-hot-pepper {
+  border: 1px solid blue; }
+.player2Grid .crop3-hot-pepper.hit {
+  background-image: url("../images/crop3-hot-pepper-destroyed.png"); }
+.player2Grid .crop4-lemon {
+  border: 1px solid blue; }
+.player2Grid .crop4-lemon.hit {
+  background-image: url("../images/crop4-lemon-destroyed.png"); }
+.player2Grid .crop5-apple-alt {
+  border: 1px solid blue; }
+.player2Grid .crop5-apple-alt.hit {
+  background-image: url("../images/crop5-apple-alt-destroyed.png"); }
 .player2Grid .hit {
   background-color: dodgerblue;
   border: green; }
@@ -83,13 +134,26 @@ body {
   background-color: grey;
   border: green; }
 
-.scoreBoards {
-  margin: auto;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between; }
-  .scoreBoards .scoreBoards div {
-    margin: auto;
-    padding: 0; }
+.fa-carrot {
+  color: orange;
+  text-decoration: line-through grey; }
+
+.fa-seedling {
+  color: green; }
+
+.fa-pepper-hot {
+  color: red; }
+
+.fa-apple-alt {
+  color: SpringGreen; }
+
+.fa-lemon {
+  color: yellow; }
+
+button {
+  background: gold;
+  color: grey;
+  padding: 5px;
+  font-size: 24px; }
 
 /*# sourceMappingURL=style.css.map */

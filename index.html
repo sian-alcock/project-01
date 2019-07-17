@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <title>SEI Project 1 - BattleShips</title>
     <script src="js/app.js" charset="utf-8"></script>
-    <link href="https://fonts.googleapis.com/css?family=Sunflower:300&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Gochi+Hand&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
     <script src="https://kit.fontawesome.com/fb7ad31190.js"></script>
 
@@ -12,20 +12,18 @@
   <body>
     <header>
       <h1>Crop Capers</h1>
-      <p>Instructions<p>
         <button type="button" name="button" id="start">Start / reset game</button>
-        <div class="scoreBoards">
-          <div class="scoreBoardPlayer2">
-            <ul></ul>
-          </div>
-          <div class="scoreBoardPlayer1">
-            <ul></ul>
-          </div>
-        </div>
     </header>
     <main>
       <div class="game">
         <div class="player1Space">
+          <div class="scoreBoardPlayer1">
+            <img class="crop1-carrot" src="images/crop2.png">
+            <img class="crop2-seedling" src="images/crop1.png">
+            <img class="crop3-hot-pepper" src="images/crop3.png">
+            <img class="crop4-lemon" src="images/crop4.png">
+            <img class="crop5-apple-alt" src="images/crop5.png">
+          </div>
           <h2>Your Farm</h2>
           <p>Uh-oh, someone's been digging....</p>
           <section class="player1Grid">
@@ -35,8 +33,15 @@
         <div class="billBoard">
         </div>
         <div class="player2Space">
+          <div class="scoreBoardPlayer2">
+            <img class="crop1-carrot"src="images/crop2.png">
+            <img class="crop2-seedling" src="images/crop1.png">
+            <img class="crop3-hot-pepper"src="images/crop3.png">
+            <img class="crop4-lemon"src="images/crop4.png">
+            <img class="crop5-apple-alt"src="images/crop5.png">
+          </div>
           <h2>Farmer Giles' Farm</h2>
-          <p>Click cells to find and destroy your biggest rival's crops</p>
+          <p>Click cells to find and destroy your rival's crops</p>
           <section class="player2Grid">
           </section>
       </div>

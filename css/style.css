@@ -94,14 +94,13 @@ video {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  order: 2; }
-  @media only screen and (min-width: 769px) {
-    .player1Space {
-      width: 50%; } }
+  order: 2;
+  width: 50%; }
 
 .rePlant button {
   width: 200px;
-  margin: 5px 0; }
+  margin: 5px 0;
+  width: 50%; }
 
 .player2Space {
   margin: auto;
@@ -125,10 +124,11 @@ video {
   width: 100%;
   height: 100%;
   display: none;
-  justify-content: center;
-  align-items: center;
   flex-direction: column;
-  order: 6; }
+  justify-content: space-between;
+  align-items: center;
+  order: 6;
+  padding-top: 100px; }
 
 .player1Grid, .player2Grid {
   width: 300px;

@@ -125,8 +125,10 @@ document.addEventListener('DOMContentLoaded', () => {
   function goToChangeCrops() {
     player1Space.style.display = 'flex'
     changeCropsSpace.style.display = 'flex'
-    // player1Space.style.order = 1
-    // changeCropsSpace.style.order = 2
+    changeCropsSpace.style.justifyContents = 'center'
+    changeCropsSpace.style.alignItems = 'center'
+    player1Space.style.width = '50%'
+    changeCropsSpace.style.width = '50%'
     startBoard.style.display = 'none'
     billBoard.style.display = 'none'
     body.style.backgroundImage = 'url(\'images/background.png\')'

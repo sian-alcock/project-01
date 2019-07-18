@@ -2,7 +2,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const player1Grid = document.querySelector('.player1Grid')
   const player2Grid = document.querySelector('.player2Grid')
+  const changeCropsSpace = document.querySelector('.rePlant')
   const changeCrops = document.querySelector('#changeCrops')
+  const readyToPlay = document.querySelector('#readyToPlay')
   const startBtn = document.querySelector('#start')
   const resetBtn = document.querySelector('#reset')
   const scoreBoardPlayer1Images = Array.from(document.querySelectorAll('.scoreBoardPlayer1 img'))
@@ -59,42 +61,11 @@ document.addEventListener('DOMContentLoaded', () => {
   createPlayerGrid(1, player1Grid)
   createPlayerGrid(2, player2Grid)
 
-  function playMusic() {
-    music.play()
-  }
-
-  function start(){
-    startBoardText.style.display = 'none'
-    startBtn.style.display = 'none'
-    video.style.width = '100%'
-    video.style.height = '100%'
-    video.play()
-    setTimeout(setUpGame, 7000)
-    setTimeout(playMusic, 7000)
-  }
-
-  function setUpGame() {
-    player1Space.style.display = 'flex'
-    player2Space.style.display = 'flex'
-    startBoard.style.display = 'none'
-    billBoard.style.display = 'none'
-    player1Space.style.order = 1
-    player2Space.style.order = 2
-    startBoard.style.order = 3
-    billBoard.style.order = 4
-    resetBtn.style.display = 'unset'
+  function reset() {
     gameOverText.textContent = ''
-    // body.style.backgroundColor = 'white'
-    body.style.backgroundImage = 'url(\'images/background.png\')'
-    header.style.display = 'flex'
-    gameArea.style.border = '1px solid grey'
-    gameArea.style.boxShadow ='0px 3px 15px rgba(0,0,0,0.2)'
-    gameArea.style.backgroundColor = 'white'
-    // billBoard.removeChild(gameOver)
 
     scoreBoardPlayer1Images.forEach(crop => crop.src=`images/${crop.className}-score.png`)
     scoreBoardPlayer2Images.forEach(crop => crop.src=`images/${crop.className}-score.png`)
-
 
     arrayHitsPlayer1 = []
     arrayHitsPlayer2 = []
@@ -129,16 +100,54 @@ document.addEventListener('DOMContentLoaded', () => {
     getPlayer2Selection()
     // getPlayer2Goes() //This will replace the above function once it is working
     // getPlayer2Goes()
-    console.log(player2Goes)
+    // console.log(player2Goes)
   }
 
 
   const player1GridCells = Array.from(document.querySelectorAll('.player1Grid div'))
   const player2GridCells = Array.from(document.querySelectorAll('.player2Grid div'))
+  function playMusic() {
+    music.play()
+  }
 
-  //************Generate player grid content****************
+  function start(){
+    startBoardText.style.display = 'none'
+    startBtn.style.display = 'none'
+    video.style.width = '100%'
+    video.style.height = '100%'
+    video.play()
+    setTimeout(goToChangeCrops, 7000)
+    setTimeout(playMusic, 7000)
+  }
 
-  //   Let the computer choose either vertical or horizontal orientation for the crops at random.
+  function goToChangeCrops() {
+    player1Space.style.display = 'flex'
+    changeCropsSpace.style.display = 'flex'
+    // player1Space.style.order = 1
+    // changeCropsSpace.style.order = 2
+    startBoard.style.display = 'none'
+    billBoard.style.display = 'none'
+    body.style.backgroundImage = 'url(\'images/background.png\')'
+    header.style.display = 'flex'
+    gameArea.style.border = '1px solid grey'
+    gameArea.style.boxShadow ='0px 3px 15px rgba(0,0,0,0.2)'
+    gameArea.style.backgroundColor = 'white'
+    reset()
+  }
+
+  function goToGame () {
+    player2Space.style.display = 'flex'
+    resetBtn.style.display = 'unset'
+    changeCropsSpace.style.display = 'none'
+  }
+
+  function startAgain() {
+    player1Space.style.display = 'flex'
+    player2Space.style.display = 'flex'
+    startBoard.style.display = 'none'
+    billBoard.style.display = 'none'
+    reset()
+  }
 
   function setCropOrientation() {
   // use a random number between 0 and 1 to assign the orientation of the crop (ie vertical or horizontal) at random
@@ -208,7 +217,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
     )
-  } // end of forEach loop
+  }
 
   function populateGrid(gridCells) {
 
@@ -271,8 +280,6 @@ document.addEventListener('DOMContentLoaded', () => {
     return player2SelectedCells
   }
 
-
-
   function playerHitRoutine (targetCell, player) {
     let arrayHits
     let cropsDestroyed
@@ -304,8 +311,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     // check to see if all crops have been destroyed (end of game!!)
     if(cropsArray.every(crop => cropsDestroyed[crop])) {
-      // gameOver = document.createElement('p')
-      // billBoard.appendChild(gameOver)
       if(player === 'player1'){
         gameOverText.textContent='GAME OVER!!!  You got all Farmer Giles\' crops!'
       } else {
@@ -355,8 +360,15 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // changeCrops.addEventListener('click', populateGrid.bind(player2GridCells))
   startBtn.addEventListener('click', start)
-  resetBtn.addEventListener('click', setUpGame)
+  resetBtn.addEventListener('click', startAgain)
+  changeCrops.addEventListener('click', reset)
+  readyToPlay.addEventListener('click', goToGame)
+
   player2GridCells.forEach(cell => cell.addEventListener('click', userGo))
+
+
+
+
 
   // ***************************ATTEMPT AT GETTING INTELLIGENT P2 GOES*******************
   let randomMode = true

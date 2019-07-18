@@ -77,9 +77,6 @@ body {
   align-items: center;
   flex-direction: column;
   order: 3; }
-  @media only screen and (min-width: 769px) {
-    .player2Space {
-      width: 50%; } }
 
 .billBoard {
   width: 100%;
@@ -90,6 +87,15 @@ body {
     font-size: 50px;
     padding: 100px 0;
     align-items: center; }
+
+.rePlant {
+  width: 100%;
+  height: 100%;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  order: 6; }
 
 .player1Grid, .player2Grid {
   width: 300px;
@@ -107,7 +113,7 @@ body {
 .player1Grid .crop1-lime {
   background-image: url("../images/crop1-lime.png"); }
 .player1Grid .crop1-lime.hit {
-  background-image: url("../images/crop1-lime.png"); }
+  background-image: url("../images/crop1-lime-destroyed.png"); }
 .player1Grid .crop2-peach {
   background-image: url("../images/crop2-peach.png"); }
 .player1Grid .crop2-peach.hit {

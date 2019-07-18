@@ -164,6 +164,9 @@ body {
   flex-wrap: wrap;
   justify-content: center; }
 
+.scoreBoardPlayer1 img, .scoreBoardPlayer1 img {
+  padding: 0 5px; }
+
 button {
   background: gold;
   color: grey;

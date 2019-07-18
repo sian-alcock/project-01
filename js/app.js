@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const scoreBoardPlayer1Images = Array.from(document.querySelectorAll('.scoreBoardPlayer1 img'))
   const scoreBoardPlayer2Images = Array.from(document.querySelectorAll('.scoreBoardPlayer2 img'))
   const billBoard = document.querySelector('.billBoard')
+  const gameOverText = document.querySelector('.gameOver')
   const player1Space = document.querySelector('.player1Space')
   const player2Space = document.querySelector('.player2Space')
   const startBoard = document.querySelector('.startBoard')
@@ -16,13 +17,12 @@ document.addEventListener('DOMContentLoaded', () => {
   const gameArea = document.querySelector('.game')
   const body = document.querySelector('body')
   const header = document.querySelector('header')
-  const missSound = document.querySelector('#missSound')
-  const hitSound = document.querySelector('#hitSound')
-  const music = document.querySelector('#music')
-  const gameOverSound = document.querySelector('#gameOverSound')
 
 
-console.log(body)
+  const missSound = new Audio('sounds/miss.wav')
+  const hitSound = new Audio('sounds/hit.wav')
+  const music = new Audio('sounds/background-music.mp3')
+  const gameOverSound = new Audio('sounds/applause.wav')
 
   let validHorizontalStartCells = []
   let validVerticalStartCells = []
@@ -42,7 +42,6 @@ console.log(body)
   let cropsDestroyedPlayer1 = {}
   let cropsDestroyedPlayer2 = {}
   const cropsArray = Object.keys(crops)
-  let gameOver = ''
 
   //Create player grid(s)
 
@@ -71,7 +70,7 @@ console.log(body)
     video.style.height = '100%'
     video.play()
     setTimeout(setUpGame, 7000)
-    // setTimeout(playMusic, 7000)
+    setTimeout(playMusic, 7000)
   }
 
   function setUpGame() {
@@ -84,13 +83,14 @@ console.log(body)
     startBoard.style.order = 3
     billBoard.style.order = 4
     resetBtn.style.display = 'unset'
-    gameOver.innerHTML = ''
+    gameOverText.textContent = ''
     // body.style.backgroundColor = 'white'
     body.style.backgroundImage = 'url(\'images/background.png\')'
     header.style.display = 'flex'
     gameArea.style.border = '1px solid grey'
     gameArea.style.boxShadow ='0px 3px 15px rgba(0,0,0,0.2)'
     gameArea.style.backgroundColor = 'white'
+    // billBoard.removeChild(gameOver)
 
     scoreBoardPlayer1Images.forEach(crop => crop.src=`images/${crop.className}-score.png`)
     scoreBoardPlayer2Images.forEach(crop => crop.src=`images/${crop.className}-score.png`)
@@ -274,26 +274,21 @@ console.log(body)
 
 
   function playerHitRoutine (targetCell, player) {
-    // const targetGrid = `${player}GridCells`
     let arrayHits
     let cropsDestroyed
-    // let scoreBoard
     let scoreBoardImages
 
     if(player === 'player1') {
       arrayHits = arrayHitsPlayer1
       cropsDestroyed = cropsDestroyedPlayer1
-      // scoreBoard = scoreBoardPlayer1
       scoreBoardImages = scoreBoardPlayer1Images
     } else if (player === 'player2'){
       arrayHits = arrayHitsPlayer2
       cropsDestroyed = cropsDestroyedPlayer2
-      // scoreBoard = scoreBoardPlayer2
       scoreBoardImages = scoreBoardPlayer2Images
     }
     targetCell.classList.add('hit')
     arrayHits.push(targetCell)
-    // console.log(arrayHits)
     // check the crop
     const classList = Array.from(targetCell.classList)
     const hitCrop = classList.filter(crop => cropsArray.includes(crop))
@@ -309,13 +304,14 @@ console.log(body)
     }
     // check to see if all crops have been destroyed (end of game!!)
     if(cropsArray.every(crop => cropsDestroyed[crop])) {
-      gameOver = document.createElement('p')
-      billBoard.appendChild(gameOver)
+      // gameOver = document.createElement('p')
+      // billBoard.appendChild(gameOver)
       if(player === 'player1'){
-        gameOver.textContent='GAME OVER!!!  You got all Farmer Giles\' crops!'
+        gameOverText.textContent='GAME OVER!!!  You got all Farmer Giles\' crops!'
       } else {
-        'GAME OVER!!!  Farmer Giles was too quick for you.  Better luck next time!'
+        gameOverText.textContent='GAME OVER!!!  Farmer Giles was too quick for you.  Better luck next time!'
       }
+      gameOverSound.play()
       billBoard.style.order = 1
       billBoard.style.display = 'unset'
       player1Space.style.display = 'none'
@@ -330,7 +326,7 @@ console.log(body)
     if(!this.classList.contains('hit') && !this.classList.contains('miss')) {
       //hit loop starts here
       if(this.classList.contains('planted')) {
-        // hitSound.play()
+        hitSound.play()
         const targetCell = e.target
         console.log(targetCell)
         playerHitRoutine(targetCell, 'player1')
@@ -338,7 +334,7 @@ console.log(body)
         goCount++
       } else {
         this.classList.add('miss')
-        // missSound.play()
+        missSound.play()
         computerGo(goCount)
         goCount++
       }

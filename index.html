@@ -19,8 +19,11 @@
         <div class="startBoard">
           <button type="button" name="button" id="start">Start game</button>
           <p>Every year, you enter your best fruit and vegetable crops for prizes at the county fair.  Your biggest rival - Farmer Giles - has turned ruthless and is destroying your crops to scupper your chances.  Find and destroy Farmer Giles' crops before he destroys yours!!</p>
-          <video width="300" height="300px" src="movies/cropcapers-coolmovie.m4v">
+          <div id="video">
+        	<video>
+        		<source src="movies/cropcapers-coolmovie.m4v" type="video/mp4" width="800px">
           </video>
+          </div>
         </div>
         <div class="player1Space">
           <div class="scoreBoardPlayer2">
@@ -36,7 +39,7 @@
         </div>
         <div class="billBoard">
         </div>
-      <section class="player2Space">
+      <div class="player2Space">
           <div class="scoreBoardPlayer1">
             <img class="crop1-lime" src="images/crop1-lime-score.png">
             <img class="crop2-peach" src="images/crop2-peach-score.png">
@@ -47,8 +50,12 @@
           <h2>Farmer Giles' Farm</h2>
           <section class="player2Grid">
           </section>
-      </section>
+      </div>
       </div>
     </main>
+    <audio id="missSound" src="/sounds/miss.wav"></audio>
+    <audio id="hitSound"src="/sounds/hit.wav"></audio>
+    <audio id="gameOverSound"src="/sounds/applause.wav"></audio>
+    <audio id="music" src="/sounds/background.mp3"></audio>
   </body>
 </html>

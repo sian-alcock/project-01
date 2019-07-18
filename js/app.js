@@ -14,9 +14,15 @@ document.addEventListener('DOMContentLoaded', () => {
   const video = document.querySelector('video')
   const startBoardText = document.querySelector('.startBoard p')
   const gameArea = document.querySelector('.game')
+  const body = document.querySelector('body')
+  const header = document.querySelector('header')
+  const missSound = document.querySelector('#missSound')
+  const hitSound = document.querySelector('#hitSound')
+  const music = document.querySelector('#music')
+  const gameOverSound = document.querySelector('#gameOverSound')
 
-console.log(scoreBoardPlayer1Images)
-console.log(scoreBoardPlayer2Images)
+
+console.log(body)
 
   let validHorizontalStartCells = []
   let validVerticalStartCells = []
@@ -51,9 +57,12 @@ console.log(scoreBoardPlayer2Images)
     }
   }
 
-
   createPlayerGrid(1, player1Grid)
   createPlayerGrid(2, player2Grid)
+
+  function playMusic() {
+    music.play()
+  }
 
   function start(){
     startBoardText.style.display = 'none'
@@ -62,6 +71,7 @@ console.log(scoreBoardPlayer2Images)
     video.style.height = '100%'
     video.play()
     setTimeout(setUpGame, 7000)
+    // setTimeout(playMusic, 7000)
   }
 
   function setUpGame() {
@@ -75,7 +85,12 @@ console.log(scoreBoardPlayer2Images)
     billBoard.style.order = 4
     resetBtn.style.display = 'unset'
     gameOver.innerHTML = ''
-
+    // body.style.backgroundColor = 'white'
+    body.style.backgroundImage = 'url(\'images/background.png\')'
+    header.style.display = 'flex'
+    gameArea.style.border = '1px solid grey'
+    gameArea.style.boxShadow ='0px 3px 15px rgba(0,0,0,0.2)'
+    gameArea.style.backgroundColor = 'white'
 
     scoreBoardPlayer1Images.forEach(crop => crop.src=`images/${crop.className}-score.png`)
     scoreBoardPlayer2Images.forEach(crop => crop.src=`images/${crop.className}-score.png`)
@@ -121,14 +136,9 @@ console.log(scoreBoardPlayer2Images)
   const player1GridCells = Array.from(document.querySelectorAll('.player1Grid div'))
   const player2GridCells = Array.from(document.querySelectorAll('.player2Grid div'))
 
-
-
   //************Generate player grid content****************
 
   //   Let the computer choose either vertical or horizontal orientation for the crops at random.
-
-
-
 
   function setCropOrientation() {
   // use a random number between 0 and 1 to assign the orientation of the crop (ie vertical or horizontal) at random
@@ -142,16 +152,12 @@ console.log(scoreBoardPlayer2Images)
     return orientation
   }
 
-  // console.log(player1GridCells)
-
   function getValidStartingCells(orientation, crop, cropLength, gridCells) {
     validHorizontalStartCells = []
     validVerticalStartCells = []
     gridCells.forEach((cell, i) => {
       if(orientation === 'horizontal') {
         // if the cells fall within the grid and are empty (ie do not contain the class of empty, then push into the validStartCells array)
-
-        // I cut this code (i+counter) % gridWidth <= cropLength &&
 
         const checksArray = []
 
@@ -203,15 +209,6 @@ console.log(scoreBoardPlayer2Images)
     }
     )
   } // end of forEach loop
-  // TESTING FOR ABOVE FUNCTION - DON'T DELETE ********
-
-
-
-  // console.log(validStartCells.length)
-  // const randomIndex = Math.floor(Math.random()* validStartCells.length)
-  // console.log(randomIndex)
-  // console.log(validStartCells[randomIndex])
-
 
   function populateGrid(gridCells) {
 
@@ -220,7 +217,7 @@ console.log(scoreBoardPlayer2Images)
       const cropLength = crops[crop]
       // set crop orientation
       const cropOrientation = setCropOrientation()
-      // get valid cells (ie ones in which crops can be planted without falling out of the grid or overlaying existing crops)
+      // get valid cells
       getValidStartingCells(cropOrientation, crop, cropLength, gridCells)
 
       // choose a random cell in which to plant the plantCrops
@@ -260,21 +257,7 @@ console.log(scoreBoardPlayer2Images)
         i++
       }
     }
-    const plantedCells = gridCells.filter(cell => cell.classList.contains('planted'))
-    if(plantedCells.length < 17) {
-      // console.log('This grid contains overwritten cells')
-    } else {
-      // console.log('This grid is pukka!!')
-    }
   }
-
-  //Test function below
-  // plantCrops('horizontal', 5, 1)
-
-
-
-  // console.log(validVerticalStartCells)
-
 
   // **********************Play the Game ******************************
 
@@ -347,6 +330,7 @@ console.log(scoreBoardPlayer2Images)
     if(!this.classList.contains('hit') && !this.classList.contains('miss')) {
       //hit loop starts here
       if(this.classList.contains('planted')) {
+        // hitSound.play()
         const targetCell = e.target
         console.log(targetCell)
         playerHitRoutine(targetCell, 'player1')
@@ -354,6 +338,7 @@ console.log(scoreBoardPlayer2Images)
         goCount++
       } else {
         this.classList.add('miss')
+        // missSound.play()
         computerGo(goCount)
         goCount++
       }

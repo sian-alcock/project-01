@@ -14,13 +14,13 @@ h1, h2, p {
 
 h1 {
   font-family: 'Gochi Hand', cursive;
-  padding-top: 50px;
+  padding-top: 24px;
   padding-bottom: 0;
   color: white;
 }
 
 header {
-  display: flex;
+  display: none;
   justify-content: space-between;
   flex-wrap: wrap;
   align-items: baseline;
@@ -31,7 +31,7 @@ header {
   }
   h1 {
     text-align: center;
-    font-size: 100px;
+    font-size: 60px;
     color: gold;
   }
 }
@@ -39,7 +39,7 @@ header {
 body {
   margin: 0 auto;
   background-color: black;
-  background-image: url('../images/background.png');
+  // background-image: url('../images/background.png');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -54,9 +54,7 @@ body {
   display: flex;
   justify-content: space-around;
   flex-wrap: wrap;
-  background-color: white;
-  border: 1px solid grey;
-  box-shadow: 0px 3px 15px rgba(0,0,0,0.2)
+  background-color: black;
 }
 
 .startBoard {
@@ -65,6 +63,13 @@ body {
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  width: 100%;
+  height: 100%;
+  order: 1;
+}
+
+.startBoard p {
+  color: gold;
 }
 
 .player1Space {
@@ -100,14 +105,9 @@ body {
   display: none;
     p{
       font-size: 50px;
+      padding: 100px 0;
+      align-items: center;
     }
-}
-
-.startBoard {
-  width: 100%;
-  height: 100%;
-  order: 1;
-  margin: 0 auto;
 }
 
 .player1Grid, .player2Grid {
@@ -235,7 +235,7 @@ flex-wrap: wrap;
 justify-content: center;
 }
 
-.scoreBoardPlayer1 img, .scoreBoardPlayer1 img {
+.scoreBoardPlayer1 img, .scoreBoardPlayer2 img {
   padding: 0 5px;
 }
 
@@ -251,6 +251,7 @@ button {
   display: none;
 }
 
-video {
+#video {
   margin: 4px;
+  border: 1px solid black;
 }

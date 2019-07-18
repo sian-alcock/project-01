@@ -235,67 +235,168 @@ flex-wrap: wrap;
 justify-content: center;
 }
 
-.scoreBoardPlayer1.crop1-lime {
-    background-image: url("../images/crop1.png");
-  }
-.scoreBoardPlayer1 .crop1-lime.hit {
-    background-image: url("../images/crop1-hit.png");
-  }
-.scoreBoardPlayer1 .crop2-peach {
-    background-image: url("../images/crop2.png");
-  }
-.scoreBoardPlayer1 .crop2-peach.hit {
-    background-image: url("../images/crop2-hit.png");
-  }
-.scoreBoardPlayer1 .crop3-seedling {
-    background-image: url("../images/crop3.png");
-  }
-.scoreBoardPlayer1 .crop3-seedling.hit {
-    background-image: url("../images/crop3-hit.png");
-  }
-.scoreBoardPlayer1 .crop4-hot-pepper {
-    background-image: url("../images/crop4.png");
-  }
-.scoreBoardPlayer1 .crop4-hot-pepper.hit {
-    background-image: url("../images/crop4-hit.png");
-  }
-.scoreBoardPlayer1 .crop5-carrot {
-    background-image: url("../images/crop5.png");
-  }
-.scoreBoardPlayer1 .crop5-carrot.hit {
-    background-image: url("../images/crop5-hit.png");
-  }
-
-  .scoreBoardPlayer2 .crop1-lime {
-      background-image: url("../images/crop1.png");
-    }
-  .scoreBoardPlayer2 .crop1-lime.hit {
-      background-image: url("../images/crop1-hit.png");
-    }
-  .scoreBoardPlayer2 .crop2-peach {
-      background-image: url("../images/crop2.png");
-    }
-  .scoreBoardPlayer2 .crop2-peach.hit {
-      background-image: url("../images/crop2-hit.png");
-    }
-  .scoreBoardPlayer2 .crop3-seedling {
-      background-image: url("../images/crop3.png");
-    }
-  .scoreBoardPlayer2 .crop3-seedling.hit {
-      background-image: url("../images/crop3-hit.png");
-    }
-  .scoreBoardPlayer2 .crop4-hot-pepper {
-      background-image: url("../images/crop4.png");
-    }
-  .scoreBoardPlayer2 .crop4-hot-pepper.hit {
-      background-image: url("../images/crop4-hit.png");
-    }
-  .scoreBoardPlayer2 .crop5-carrot {
-      background-image: url("../images/crop5.png");
-    }
-  .scoreBoardPlayer2 .crop5-carrot.hit {
-      background-image: url("../images/crop5-hit.png");
-    }
+// .p2score1 {
+//     background-image: url("../images/crop1.png");
+//     background-position: center;
+//     background-size: cover;
+//     background-repeat: no-repeat;
+//     height: 80px;
+//     width: 80px;
+//
+//   }
+// .scoreBoardPlayer1 .crop1-lime.hit {
+//     background-image: url("../images/crop1-hit.png");
+//     background-position: center;
+//     background-size: cover;
+//     background-repeat: no-repeat;
+//     height: 80px;
+//     width: 80px;
+//   }
+// .scoreBoardPlayer1 .crop2-peach {
+//     background-image: url("../images/crop2.png");
+//     background-position: center;
+//     background-size: cover;
+//     background-repeat: no-repeat;
+//     height: 80px;
+//     width: 80px;
+//   }
+// .scoreBoardPlayer1 .crop2-peach.hit {
+//     background-image: url("../images/crop2-hit.png");
+//     background-position: center;
+//     background-size: cover;
+//     background-repeat: no-repeat;
+//     height: 80px;
+//     width: 80px;
+//   }
+// .scoreBoardPlayer1 .crop3-seedling {
+//     background-image: url("../images/crop3.png");
+//     background-position: center;
+//     background-size: cover;
+//     background-repeat: no-repeat;
+//     height: 80px;
+//     width: 80px;
+//   }
+// .scoreBoardPlayer1 .crop3-seedling.hit {
+//     background-image: url("../images/crop3-hit.png");
+//     background-position: center;
+//     background-size: cover;
+//     background-repeat: no-repeat;
+//     height: 80px;
+//     width: 80px;
+//   }
+// .scoreBoardPlayer1 .crop4-hot-pepper {
+//     background-image: url("../images/crop4.png");
+//     background-position: center;
+//     background-size: cover;
+//     background-repeat: no-repeat;
+//     height: 80px;
+//     width: 80px;
+//   }
+// .scoreBoardPlayer1 .crop4-hot-pepper.hit {
+//     background-image: url("../images/crop4-hit.png");
+//     background-position: center;
+//     background-size: cover;
+//     background-repeat: no-repeat;
+//     height: 80px;
+//     width: 80px;
+//   }
+// .scoreBoardPlayer1 .crop5-carrot {
+//     background-image: url("../images/crop5.png");
+//     background-position: center;
+//     background-size: cover;
+//     background-repeat: no-repeat;
+//     height: 80px;
+//     width: 80px;
+//   }
+// .scoreBoardPlayer1 .crop5-carrot.hit {
+//     background-image: url("../images/crop5-hit.png");
+//     background-position: center;
+//     background-size: cover;
+//     background-repeat: no-repeat;
+//     height: 80px;
+//     width: 80px;
+//   }
+//
+//   .scoreBoardPlayer2 .crop1-lime {
+//       background-image: url("../images/crop1.png");
+//       background-position: center;
+//       background-size: cover;
+//       background-repeat: no-repeat;
+//       height: 80px;
+//       width: 80px;
+//     }
+//   .scoreBoardPlayer2 .crop1-lime.hit {
+//       background-image: url("../images/crop1-hit.png");
+//       background-position: center;
+//       background-size: cover;
+//       background-repeat: no-repeat;
+//       height: 80px;
+//       width: 80px;
+//     }
+//   .scoreBoardPlayer2 .crop2-peach {
+//       background-image: url("../images/crop2.png");
+//       background-position: center;
+//       background-size: cover;
+//       background-repeat: no-repeat;
+//       height: 80px;
+//       width: 80px;
+//     }
+//   .scoreBoardPlayer2 .crop2-peach.hit {
+//       background-image: url("../images/crop2-hit.png");
+//       background-position: center;
+//       background-size: cover;
+//       background-repeat: no-repeat;
+//       height: 80px;
+//       width: 80px;
+//     }
+//   .scoreBoardPlayer2 .crop3-seedling {
+//       background-image: url("../images/crop3.png");
+//       background-position: center;
+//       background-size: cover;
+//       background-repeat: no-repeat;
+//       height: 80px;
+//       width: 80px;
+//     }
+//   .scoreBoardPlayer2 .crop3-seedling.hit {
+//       background-image: url("../images/crop3-hit.png");
+//       background-position: center;
+//       background-size: cover;
+//       background-repeat: no-repeat;
+//       height: 80px;
+//       width: 80px;
+//     }
+//   .scoreBoardPlayer2 .crop4-hot-pepper {
+//       background-image: url("../images/crop4.png");
+//       background-position: center;
+//       background-size: cover;
+//       background-repeat: no-repeat;
+//       height: 80px;
+//       width: 80px;
+//     }
+//   .scoreBoardPlayer2 .crop4-hot-pepper.hit {
+//       background-image: url("../images/crop4-hit.png");
+//       background-position: center;
+//       background-size: cover;
+//       background-repeat: no-repeat;
+//       height: 80px;
+//       width: 80px;
+//     }
+//   .scoreBoardPlayer2 .crop5-carrot {
+//       background-image: url("../images/crop5.png");
+//       background-position: center;
+//       background-size: cover;
+//       background-repeat: no-repeat;
+//       height: 80px;
+//       width: 80px;
+//     }
+//   .scoreBoardPlayer2 .crop5-carrot.hit {
+//       background-image: url("../images/crop5-hit.png");
+//       background-position: center;
+//       background-size: cover;
+//       background-repeat: no-repeat;
+//       height: 80px;
+//       width: 80px;
+//     }
 
 
 button {

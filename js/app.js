@@ -19,6 +19,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const gameArea = document.querySelector('.game')
   const body = document.querySelector('body')
   const header = document.querySelector('header')
+  const welcome = document.querySelector('.welcome')
 
 
   const missSound = new Audio('sounds/miss.wav')
@@ -112,6 +113,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function start(){
     startBoardText.style.display = 'none'
+    welcome.style.backgroundColor = 'black'
     startBtn.style.display = 'none'
     video.style.width = '100%'
     video.style.height = '100%'

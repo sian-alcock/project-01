@@ -17,12 +17,20 @@
     <main>
       <div class="game">
         <div class="startBoard">
-          <button type="button" name="button" id="start">Start game</button>
-          <p>Every year, you enter your best fruit and vegetable crops for prizes at the county fair.  Your biggest rival - Farmer Giles - has turned ruthless and is destroying your crops to scupper your chances.  Find and destroy Farmer Giles' crops before he destroys yours!!</p>
-          <div id="video">
-        	<video>
-        		<source src="movies/cropcapers-coolmovie.m4v" type="video/mp4" width="800px">
-          </video>
+          <div class="welcome">
+            <div class="wrapper">
+              <video>
+                <source src="movies/cropcapers-coolmovie.m4v" type="video/mp4" width="300px" height="300px" controls>
+              </video>
+              <div class="farmer">
+                <img src="images/farmer-man.png" alt=" Farmer with box of fruit">
+              </div>
+            </div>
+            <div class="welcomeText">
+              <p>Farmer Giles has been secretly digging up your crops to scupper your chances at the county fair.</p>
+              <p>Get your revenge by attacking his fruit and veg!</p>
+              <button type="button" name="button" id="start">Start game</button>
+            </div>
           </div>
         </div>
         <div class="player1Space">

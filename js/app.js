@@ -99,9 +99,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     }
     getPlayer2Selection()
-    // getPlayer2Goes() //This will replace the above function once it is working
-    // getPlayer2Goes()
-    // console.log(player2Goes)
   }
 
 
@@ -154,7 +151,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function setCropOrientation() {
-  // use a random number between 0 and 1 to assign the orientation of the crop (ie vertical or horizontal) at random
+  // Use a random number to assign the orientation of the crop (ie vertical or horizontal)
 
     const randomNumber = Math.floor(Math.random()*2)
     if(randomNumber === 1){
@@ -166,11 +163,12 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function getValidStartingCells(orientation, crop, cropLength, gridCells) {
+    // Creates array of 'valid' cells in which the first crop can be placed and all its associate crop items can fit in the grid
     validHorizontalStartCells = []
     validVerticalStartCells = []
     gridCells.forEach((cell, i) => {
       if(orientation === 'horizontal') {
-        // if the cells fall within the grid and are empty (ie do not contain the class of empty, then push into the validStartCells array)
+        // if the cells fall within the grid and are empty, then push into the validStartCells array
 
         const checksArray = []
 
@@ -196,7 +194,7 @@ document.addEventListener('DOMContentLoaded', () => {
       }
 
       if(orientation === 'vertical') {
-        // if the cells fall within the grid and are empty (ie do not contain the class of empty, then push into the validStartCells array)
+        // if the cells fall within the grid and are empty, then push into the validStartCells array)
 
         const checksArray = []
 
@@ -246,10 +244,8 @@ document.addEventListener('DOMContentLoaded', () => {
         plantCrops(cropOrientation, crop, cropLength, randomCellDataId, gridCells)
 
       }
-      // plant the crops!
-    } // end of for loop
-
-  } //end of function
+    }
+  }
 
 
 
@@ -285,6 +281,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function playerHitRoutine (targetCell, player) {
+    // Manages the actions on 'go' for both players
     let arrayHits
     let cropsDestroyed
     let scoreBoardImages
@@ -310,8 +307,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
       const targetScoreBoardImage = scoreBoardImages.filter(image => image.classList.contains(`${hitCrop}`))
       targetScoreBoardImage[0].setAttribute('src', `images/${hitCrop}-score-hit.png`)
-
-
     }
     // check to see if all crops have been destroyed (end of game!!)
     if(cropsArray.every(crop => cropsDestroyed[crop])) {
@@ -350,7 +345,6 @@ document.addEventListener('DOMContentLoaded', () => {
     } // don't do anything if the user has already clicked the cells
   }
 
-
   function computerGo (goCount) {
     console.log(player2SelectedCells)
     const targetCellIndex = player1GridCells.indexOf(player2SelectedCells[goCount])
@@ -362,7 +356,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
-  // changeCrops.addEventListener('click', populateGrid.bind(player2GridCells))
   startBtn.addEventListener('click', start)
   resetBtn.addEventListener('click', startAgain)
   changeCrops.addEventListener('click', reset)

@@ -26,6 +26,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const hitSound = new Audio('sounds/hit.wav')
   const music = new Audio('sounds/background-music.mp3')
   const gameOverSound = new Audio('sounds/applause.wav')
+  const cropDestroyedSound = new Audio('sounds/Ding-ding-ding.mp3')
 
   let validHorizontalStartCells = []
   let validVerticalStartCells = []
@@ -300,14 +301,17 @@ document.addEventListener('DOMContentLoaded', () => {
     // check the crop
     const classList = Array.from(targetCell.classList)
     const hitCrop = classList.filter(crop => cropsArray.includes(crop))
-    console.log(hitCrop)
     // check to see if this crop type has been completely destroyed
     if(arrayHits.filter(cell => cell.classList.contains(hitCrop)).length === crops[hitCrop]) {
       cropsDestroyed[hitCrop] = true
-
+      //Stop the 'hit sound'
+      hitSound.pause()
+      hitSound.currentTime = 0
+      cropDestroyedSound.play()
       const targetScoreBoardImage = scoreBoardImages.filter(image => image.classList.contains(`${hitCrop}`))
       targetScoreBoardImage[0].setAttribute('src', `images/${hitCrop}-score-hit.png`)
     }
+
     // check to see if all crops have been destroyed (end of game!!)
     if(cropsArray.every(crop => cropsDestroyed[crop])) {
       if(player === 'player1'){
@@ -321,7 +325,6 @@ document.addEventListener('DOMContentLoaded', () => {
       player1Space.style.display = 'none'
       player2Space.style.display = 'none'
     }
-
   }
 
 
@@ -332,7 +335,6 @@ document.addEventListener('DOMContentLoaded', () => {
       if(this.classList.contains('planted')) {
         hitSound.play()
         const targetCell = e.target
-        console.log(targetCell)
         playerHitRoutine(targetCell, 'player1')
         computerGo(goCount)
         goCount++
@@ -355,6 +357,7 @@ document.addEventListener('DOMContentLoaded', () => {
       playerHitRoutine(targetCell, 'player2')
     }
   }
+
 
   startBtn.addEventListener('click', start)
   resetBtn.addEventListener('click', startAgain)

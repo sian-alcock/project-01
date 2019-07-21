@@ -52,7 +52,7 @@ body {
   margin: auto;
   padding: 20px 50px;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
   flex-wrap: wrap;
   background-color: black;
 }
@@ -90,7 +90,7 @@ body {
 
 .wrapper {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
 }
 
@@ -106,7 +106,7 @@ body {
 video {
   height: 300px;
   width: 300px;
-  margin: 15px;
+  margin: 0 80px;
 }
 
 .player1Space {
@@ -115,7 +115,7 @@ video {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  order: 2;
+  order: 1;
   width: 50%;
 }
 
@@ -131,10 +131,8 @@ video {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  order: 3;
-    // Desktop 50% width
-  // @media only screen and (min-width: 769px) {
-  //     width: 50%;
+  order: 2;
+  width: 50%;
   }
 
 

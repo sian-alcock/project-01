@@ -148,6 +148,7 @@ document.addEventListener('DOMContentLoaded', () => {
     player2Space.style.display = 'flex'
     startBoard.style.display = 'none'
     billBoard.style.display = 'none'
+    gameArea.style.backgroundColor = 'white'
     reset()
   }
 
@@ -320,6 +321,7 @@ document.addEventListener('DOMContentLoaded', () => {
         gameOverText.textContent='GAME OVER!!!  Farmer Giles was too quick for you.  Better luck next time!'
       }
       gameOverSound.play()
+      gameArea.style.backgroundColor = 'gold'
       billBoard.style.order = 1
       billBoard.style.display = 'unset'
       player1Space.style.display = 'none'

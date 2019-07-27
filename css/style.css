@@ -112,6 +112,7 @@ video {
   width: 50%; }
 
 .billBoard {
+  background-color: gold;
   width: 100%;
   height: 100%;
   order: 4;
@@ -120,6 +121,10 @@ video {
     font-size: 50px;
     padding: 100px 0;
     align-items: center; }
+
+.gameOver {
+  background-color: gold;
+  background-image: url("../images/farmer-lady.png"); }
 
 .rePlant {
   width: 100%;
@@ -147,46 +152,42 @@ video {
 .player1Grid .crop1-lime {
   background-image: url("../images/crop1-lime.png"); }
 .player1Grid .crop1-lime.hit {
-  background-image: url("../images/crop1-lime-destroyed.png"); }
+  background-image: url("../images/tick.png"); }
 .player1Grid .crop2-peach {
   background-image: url("../images/crop2-peach.png"); }
 .player1Grid .crop2-peach.hit {
-  background-image: url("../images/crop2-peach-destroyed.png"); }
+  background-image: url("../images/tick.png"); }
 .player1Grid .crop3-seedling {
   background-image: url("../images/crop3-seedling.png"); }
 .player1Grid .crop3-seedling.hit {
-  background-image: url("../images/crop3-seedling-destroyed.png"); }
+  background-image: url("../images/tick.png"); }
 .player1Grid .crop4-hot-pepper {
   background-image: url("../images/crop4-hot-pepper.png"); }
 .player1Grid .crop4-hot-pepper.hit {
-  background-image: url("../images/crop4-hot-pepper-destroyed.png"); }
+  background-image: url("../images/tick.png"); }
 .player1Grid .crop5-carrot {
   background-image: url("../images/crop5-carrot.png"); }
 .player1Grid .crop5-carrot.hit {
-  background-image: url("../images/crop5-carrot-destroyed.png"); }
+  background-image: url("../images/tick.png"); }
 .player1Grid .hit {
-  background-color: dodgerblue;
-  border: green; }
+  background-image: url("../images/tick.png"); }
 .player1Grid .miss {
-  background-color: grey;
-  border: green; }
+  background-color: grey; }
 
 .player2Grid .crop1-lime.hit {
-  background-image: url("../images/crop1-lime-destroyed.png"); }
+  background-image: url("../images/tick.png"); }
 .player2Grid .crop2-peach.hit {
-  background-image: url("../images/crop2-peach-destroyed.png"); }
+  background-image: url("../images/tick.png"); }
 .player2Grid .crop3-seedling.hit {
-  background-image: url("../images/crop3-seedling-destroyed.png"); }
+  background-image: url("../images/tick.png"); }
 .player2Grid .crop4-hot-pepper.hit {
-  background-image: url("../images/crop4-hot-pepper-destroyed.png"); }
+  background-image: url("../images/tick.png"); }
 .player2Grid .crop5-carrot.hit {
-  background-image: url("../images/crop5-carrot-destroyed.png"); }
+  background-image: url("../images/tick.png"); }
 .player2Grid .hit {
-  background-color: dodgerblue;
-  border: green; }
+  background-image: url("../images/tick.png"); }
 .player2Grid .miss {
-  background-color: grey;
-  border: green; }
+  background-color: grey; }
 
 .scoreBoardPlayer1, .scoreBoardPlayer2 {
   display: flex;

@@ -137,6 +137,7 @@ video {
 
 
 .billBoard {
+  background-color: gold;
   width: 100%;
   height: 100%;
   order: 4;
@@ -146,6 +147,11 @@ video {
       padding: 100px 0;
       align-items: center;
     }
+}
+
+.gameOver {
+  background-color: gold;
+  background-image: url('../images/farmer-lady.png')
 }
 
 .rePlant {
@@ -180,7 +186,7 @@ video {
   }
 
   .crop1-lime.hit {
-    background-image: url('../images/crop1-lime-destroyed.png');
+    background-image: url('../images/tick.png');
   }
 
   .crop2-peach {
@@ -188,7 +194,7 @@ video {
   }
 
   .crop2-peach.hit {
-    background-image: url('../images/crop2-peach-destroyed.png');
+    background-image: url('../images/tick.png');
   }
 
   .crop3-seedling {
@@ -196,7 +202,7 @@ video {
   }
 
   .crop3-seedling.hit {
-    background-image: url('../images/crop3-seedling-destroyed.png');
+    background-image: url('../images/tick.png');
   }
 
   .crop4-hot-pepper {
@@ -204,7 +210,7 @@ video {
   }
 
   .crop4-hot-pepper.hit {
-    background-image: url('../images/crop4-hot-pepper-destroyed.png');
+    background-image: url('../images/tick.png');
   }
 
   .crop5-carrot {
@@ -212,17 +218,15 @@ video {
   }
 
   .crop5-carrot.hit {
-    background-image: url('../images/crop5-carrot-destroyed.png');
+    background-image: url('../images/tick.png');
   }
 
   .hit {
-    background-color: dodgerblue;
-    border: green;
+    background-image: url('../images/tick.png');
   }
 
   .miss {
     background-color: grey;
-    border: green;
   }
 }
 
@@ -234,7 +238,7 @@ video {
   }
 
   .crop1-lime.hit {
-    background-image: url('../images/crop1-lime-destroyed.png');
+    background-image: url('../images/tick.png');
   }
 
   .crop2-peach {
@@ -242,7 +246,7 @@ video {
   }
 
   .crop2-peach.hit {
-    background-image: url('../images/crop2-peach-destroyed.png');
+    background-image: url('../images/tick.png');
   }
 
   .crop3-seedling {
@@ -250,7 +254,7 @@ video {
   }
 
   .crop3-seedling.hit {
-    background-image: url('../images/crop3-seedling-destroyed.png');
+    background-image: url('../images/tick.png');
   }
 
   .crop4-hot-pepper {
@@ -258,7 +262,7 @@ video {
   }
 
   .crop4-hot-pepper.hit {
-    background-image: url('../images/crop4-hot-pepper-destroyed.png');
+    background-image: url('../images/tick.png');
   }
 
   .crop5-carrot {
@@ -266,17 +270,15 @@ video {
   }
 
   .crop5-carrot.hit {
-    background-image: url('../images/crop5-carrot-destroyed.png');
+    background-image: url('../images/tick.png');
   }
 
   .hit {
-    background-color: dodgerblue;
-    border: green;
+    background-image: url('../images/tick.png');
 
   }
   .miss {
     background-color: grey;
-    border: green;
   }
 }
 

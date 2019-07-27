@@ -1,5 +1,33 @@
 $Background: rgba(250,250,250,0.7);
 
+@keyframes pulse_animation {
+    0% { transform: scale(1); }
+    10% { transform: scale(1.4); }
+    50% { transform: scale(1); }
+    70% { transform: scale(1.2); }
+    80% { transform: scale(1); }
+    100% { transform: scale(1); }
+}
+
+@keyframes grid_pulse_animation {
+    0% { transform: scale(1); }
+    10% { transform: scale(1.06); }
+    50% { transform: scale(1); }
+    70% { transform: scale(1.04); }
+    80% { transform: scale(1); }
+    100% { transform: scale(1); }
+}
+
+@keyframes border-pulsate {
+    0%   { border: 2px solid rgba(0, 0, 255, 1); }
+    10% { transform: scale(1.5); }
+    20%  { border: 2px solid rgba(0, 0, 255, 0); }
+    40%  { border: 2px solid rgba(0, 0, 255, 1); }
+    60%  { border: 2px solid rgba(0, 0, 255, 0); }
+    60%  { border: 2px solid rgba(0, 0, 255, 1); }
+    100% { border: 2px solid rgba(0, 0, 255, 0); }
+}
+
 * {
   box-sizing: border-box;
 }
@@ -173,7 +201,15 @@ video {
   height: 300px;
   display: flex;
   flex-wrap: wrap;
-  padding: 0 5px 20px 0;
+}
+
+.player2Grid.pulse {
+  border: 3px solid blue;
+  animation-name: grid_pulse_animation;
+  animation-duration: 5000ms;
+  transform-origin:70% 70%;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
 }
 
 .player1Grid div, .player2Grid div  {
@@ -189,7 +225,8 @@ video {
   }
 
   .crop1-lime.hit {
-    background-image: url('../images/tick.png');
+    background-image: url('../images/crop1-lime-destroyed.png');
+    animation: border-pulsate 2s 1;
   }
 
   .crop2-peach {
@@ -197,7 +234,8 @@ video {
   }
 
   .crop2-peach.hit {
-    background-image: url('../images/tick.png');
+    background-image: url('../images/crop2-peach-destroyed.png');
+    animation: border-pulsate 2s 1;
   }
 
   .crop3-seedling {
@@ -205,7 +243,8 @@ video {
   }
 
   .crop3-seedling.hit {
-    background-image: url('../images/tick.png');
+    background-image: url('../images/crop3-seedling-destroyed.png');
+    animation: border-pulsate 2s 1;
   }
 
   .crop4-hot-pepper {
@@ -213,7 +252,8 @@ video {
   }
 
   .crop4-hot-pepper.hit {
-    background-image: url('../images/tick.png');
+    background-image: url('../images/crop4-hot-pepper-destroyed.png');
+    animation: border-pulsate 2s 1;
   }
 
   .crop5-carrot {
@@ -221,7 +261,8 @@ video {
   }
 
   .crop5-carrot.hit {
-    background-image: url('../images/tick.png');
+    background-image: url('../images/crop5-carrot-destroyed.png');
+    animation: border-pulsate 2s 1;
   }
 
   .hit {
@@ -230,7 +271,14 @@ video {
 
   .miss {
     background-color: grey;
+    animation: border-pulsate 2s 1;
   }
+
+  // miss.pulse {
+  //   animation: border-pulsate 2s 1;
+  //   background-color: grey;
+  //   border: 2px solid blue;
+  // }
 }
 
 // Note: Set borders to blue to help test
@@ -293,6 +341,14 @@ justify-content: center;
 
 .scoreBoardPlayer1 img, .scoreBoardPlayer2 img {
   padding: 0 5px;
+}
+
+.scoreBoardPlayer1 img.pulse, .scoreBoardPlayer2 img.pulse {
+  animation-name: pulse_animation;
+  animation-duration: 5000ms;
+  transform-origin:70% 70%;
+  animation-iteration-count: 1;
+  animation-timing-function: linear;
 }
 
 

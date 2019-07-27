@@ -2,6 +2,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
   const player1Grid = document.querySelector('.player1Grid')
   const player2Grid = document.querySelector('.player2Grid')
+  const player1Text = document.querySelector('.player1Text')
   const changeCropsSpace = document.querySelector('.rePlant')
   const changeCrops = document.querySelector('#changeCrops')
   const readyToPlay = document.querySelector('#readyToPlay')
@@ -64,8 +65,13 @@ document.addEventListener('DOMContentLoaded', () => {
   createPlayerGrid(2, player2Grid)
 
   function reset() {
+    player1Text.textContent = 'Your crops are planted.'
     gameOverText.textContent = ''
+    // remove the pulse class
+    scoreBoardPlayer1Images.forEach(crop => crop.classList.remove('pulse'))
+    scoreBoardPlayer2Images.forEach(crop => crop.classList.remove('pulse'))
 
+    // set the images back to non-strikethrough
     scoreBoardPlayer1Images.forEach(crop => crop.src=`images/${crop.className}-score.png`)
     scoreBoardPlayer2Images.forEach(crop => crop.src=`images/${crop.className}-score.png`)
 
@@ -100,6 +106,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     }
     getPlayer2Selection()
+    // sets the player2Grid to pulse to highlight where the player needs to click
+    player2Grid.classList.add('pulse')
   }
 
 
@@ -141,6 +149,7 @@ document.addEventListener('DOMContentLoaded', () => {
     player2Space.style.display = 'flex'
     resetBtn.style.display = 'unset'
     changeCropsSpace.style.display = 'none'
+    player1Text.textContent = 'Uh-oh! Your crops are under attack!'
   }
 
   function startAgain() {
@@ -310,7 +319,10 @@ document.addEventListener('DOMContentLoaded', () => {
       hitSound.currentTime = 0
       cropDestroyedSound.play()
       const targetScoreBoardImage = scoreBoardImages.filter(image => image.classList.contains(`${hitCrop}`))
+      console.log(`this crop has been destroyed ${hitCrop}`)
       targetScoreBoardImage[0].setAttribute('src', `images/${hitCrop}-score-hit.png`)
+      targetScoreBoardImage[0].classList.add('pulse')
+
     }
 
     // check to see if all crops have been destroyed (end of game!!)
@@ -331,6 +343,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
   function userGo (e) {
+    // stop the grid pulsing when the user starts playing
+    player2Grid.classList.remove('pulse')
     // check that player1 has not already clicked this cell
     if(!this.classList.contains('hit') && !this.classList.contains('miss')) {
       //hit loop starts here

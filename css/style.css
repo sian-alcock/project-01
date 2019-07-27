@@ -124,7 +124,10 @@ video {
 
 .gameOver {
   background-color: gold;
-  background-image: url("../images/farmer-lady.png"); }
+  background-image: url("../images/farmer-lady.png");
+  background-size: contain;
+  background-position: right;
+  background-repeat: no-repeat; }
 
 .rePlant {
   width: 100%;

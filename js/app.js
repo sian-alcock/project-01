@@ -89,7 +89,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // Check the grid - if overlaps, go again
     let gridCheck1 = player1GridCells.filter(cell => cell.classList.contains('planted')).length
 
-    while(gridCheck1 !== 17) {
+    //Calculate how many cells should be planted
+    const numOfCropCells = Object.keys(crops).reduce((sum,key)=>sum+parseFloat(crops[key]||0),0)
+
+    while(gridCheck1 !== numOfCropCells) {
       player1GridCells.forEach(cell => cell.className='empty')
       populateGrid(player1GridCells)
       gridCheck1 = player1GridCells.filter(cell => cell.classList.contains('planted')).length
@@ -99,7 +102,7 @@ document.addEventListener('DOMContentLoaded', () => {
     populateGrid(player2GridCells)
     // Check the grid - if overlaps, go again
     let gridCheck2 = player2GridCells.filter(cell => cell.classList.contains('planted')).length
-    while(gridCheck2 !== 17) {
+    while(gridCheck2 !== numOfCropCells) {
       player2GridCells.forEach(cell => cell.className='empty')
       populateGrid(player2GridCells)
       gridCheck2 = player2GridCells.filter(cell => cell.classList.contains('planted')).length

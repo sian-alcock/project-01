@@ -212,7 +212,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const checksArray = []
 
         //Check the current cell to make sure it is not 'planted'
-        if(i + (gridWidth*(cropLength-1)) <= 99 && !gridCells[i].classList.contains('planted')) {
+        if(i + (gridWidth*(cropLength-1)) <= (gridWidth*gridWidth-1) && !gridCells[i].classList.contains('planted')) {
           checksArray.push(i)
         }
 
@@ -220,8 +220,8 @@ document.addEventListener('DOMContentLoaded', () => {
         let counter = 1
 
         while (counter < cropLength) {
-          if((i+9+counter) + (gridWidth*(cropLength-1)) <= 99 && !gridCells[i+9+counter].classList.contains('planted')) {
-            checksArray.push(i+9+counter)
+          if((i+ gridWidth - 1 + counter) + (gridWidth*(cropLength-1)) <= (gridWidth*gridWidth-1) && !gridCells[i+gridWidth - 1+counter].classList.contains('planted')) {
+            checksArray.push(i+gridWidth - 1+counter)
           }
           counter++
         }

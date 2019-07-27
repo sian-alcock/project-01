@@ -149,7 +149,6 @@ document.addEventListener('DOMContentLoaded', () => {
     player2Space.style.display = 'flex'
     resetBtn.style.display = 'unset'
     changeCropsSpace.style.display = 'none'
-    player1Text.textContent = 'Uh-oh! Your crops are under attack!'
   }
 
   function startAgain() {
@@ -364,7 +363,8 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function computerGo (goCount) {
-    console.log(player2SelectedCells)
+    // console.log(player2SelectedCells)
+    player1Text.textContent = 'Uh-oh!  Your crops are under attack!'
     const targetCellIndex = player1GridCells.indexOf(player2SelectedCells[goCount])
     const targetCell = player1GridCells[targetCellIndex]
     if(!targetCell.classList.contains('planted')) {

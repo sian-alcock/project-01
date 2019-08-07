@@ -10,7 +10,7 @@ This is my first project from General Assembly's Software Engineering Immersive 
 
 Launch on [GitHub Pages](https://sian-alcock.github.io/project-01/).
 
-![Main screenshot](/images/screenshot-game-play.png)
+![Main screenshot](/images/Screenshot-game-play.png)
 
 ## Brief
 
@@ -116,12 +116,12 @@ function playerHitRoutine (targetCell, player) {
 }
 ```
 
-![Screenshot](/images/screenshot-game-play.png)
+![Screenshot](/images/Screenshot-game-play.png)
 
 ### End of game and reset
 When either the player or the computer have destroyed all the crops, the game is over.  A 'Start again' button is available to reset the grids, scores etc.
 
-![Screenshot](/images/screenshot-final.png)
+![Screenshot](/images/Screenshot-final.png)
 
 ### Bugs
 

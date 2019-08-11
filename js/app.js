@@ -28,6 +28,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const music = new Audio('sounds/background-music.mp3')
   const gameOverSound = new Audio('sounds/applause.wav')
   const cropDestroyedSound = new Audio('sounds/Ding-ding-ding.mp3')
+  const gameOverLostSound = new Audio('sounds/aah.wav')
 
   let validHorizontalStartCells = []
   let validVerticalStartCells = []
@@ -51,9 +52,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const hitsIndexArray = []
   let adjacentCellArray = []
   let player2Goes = []
-  // let lastGoIndex
-  // let goCell
-  // let startingRandomHitIndex = null
 
   //Create player grid(s)
 
@@ -352,10 +350,12 @@ document.addEventListener('DOMContentLoaded', () => {
     if(cropsArray.every(crop => cropsDestroyed[crop])) {
       if(player === 'player1'){
         gameOverText.textContent='GAME OVER!!!  You got all Farmer Giles\' crops!'
+        gameOverSound.play()
       } else {
         gameOverText.textContent='GAME OVER!!!  Farmer Giles was too quick for you.  Better luck next time!'
+        gameOverLostSound.play()
       }
-      gameOverSound.play()
+
       gameArea.style.backgroundColor = 'gold'
       billBoard.style.order = 1
       billBoard.style.display = 'unset'

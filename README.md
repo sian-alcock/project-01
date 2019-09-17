@@ -6,7 +6,7 @@ Crop Capers is a fun, browser-based game, based on Battleships. The premise is t
 This is my first project from General Assembly's Software Engineering Immersive Course and first attempt at building a game from scratch using JavaScript.  I am the sole programmer on this project.
 
 ### Project duration
-7 days.
+7 days initially.  But, after the project finished, I was disappointed that I had failed to complete what I felt was a key part of the project so as soon as I had the time, I spent an additional day completing that code.  The part I completed later was to make the computer play like a human.  See below under 'Wins and Blockers'.
 
 Launch on [GitHub Pages](https://sian-alcock.github.io/project-01/).
 
@@ -22,7 +22,7 @@ Launch on [GitHub Pages](https://sian-alcock.github.io/project-01/).
 * HTML5 with HTML5 audio
 * CSS3
 * JavaScript (ES6)
-* ScSS
+* SCSS
 * Git
 * GitHub
 * Google Fonts
@@ -31,7 +31,7 @@ Launch on [GitHub Pages](https://sian-alcock.github.io/project-01/).
 
 ### Future proofing
 
-I have  tried to make the game 'future-proof' and to avoid hard coding where possible.  For example, the grid is generated at start up based on a gridWidth variable - so it should be possible to change the size of the grid at a later stage without causing any issues.  In addition, the crops and their lengths (ie the number of cells they take up in the grid) are read from an object, so the names and lengths can be changed if needed.  
+I have  tried to make the game 'future-proof' and to avoid hard coding where possible.  For example, the grid is generated at start up based on a  variable - so it should be possible to change the size of the grid at a later stage without causing any issues.  In addition, the crops and their lengths (ie the number of cells they take up in the grid) are read from an object, so the crop names and lengths could be changed if needed.  
 
 ### Generation of grids and planting of crops
 
@@ -39,13 +39,13 @@ One of the toughest challenges has been to program the 'planting' of the crops -
 * fall outside of the grid
 * clash with other crops that have already been planted.
 
-In my original planning, I was hoping to enable the player to plant his/her own crops using  'drag and drop' to pick up a crop and drag it to a cell on the grid.
+In my original planning, I was hoping to enable the player to plant his/her own crops using 'drag and drop' to pick up a crop and drag it to a cell on the grid.
 
-With this goal in mind, I decided to create an array of 'valid starting cells' - meaning that if the user dragged a crop to a valid starting cell, it and its associate crop items could safely be placed within the grid and avoiding other crops already planted.
+With this goal in mind, I decided to create an array of 'valid starting cells' - meaning that if the user dragged a crop to a valid starting cell, it and its associate crop items could safely be placed within the grid - avoiding other crops already planted.
 
-I successfully created a function that built two arrays of valid starting cells (one for vertically oriented crops and one for horizontal).  I then built a second function that referred to that array to plant the crops.
+I successfully created a function that built two arrays of valid starting cells (one for vertically oriented crops and one for horizontal).  I then built a second function that referred to that array to plant the crops at random.
 
-By building it this way, I believe that the implementation of the drag and drop capability will be simpler.
+By building it this way, I believed that implementation of a drag and drop capability could be easily plugged in at a later stage.
 
 ## Functionality
 
@@ -67,7 +67,7 @@ At the beginning of the game, the user can re-plant his/her crops by clicking a 
 ### Game play
 The player starts with an empty grid on the right hand side of the screen labelled Farmer Giles' farm.  His/her own farm sits on the left showing the crop configuration chosen in the initial set up screen.
 
-The player clicks on the cells in the grid on the right to reveal either nothing (grey square) or a 'hit crop' (cross image).  A different sound effect is played according to 'miss' or 'hit'.  When the player has destroyed a whole set of crops, the images at the top of the screen update to show the set of crops with a line through them.
+The player clicks on the cells in the grid on the right to reveal either nothing (grey square) or a 'hit crop' (tick image).  A different sound effect is played according to 'miss' or 'hit'.  When the player has destroyed a whole set of crops, the images at the top of the screen update to show the set of crops with a line through them.
 
 Each time the player clicks, the computer (aka Farmer Giles), takes its turn - the impact of which is reflected in the left hand grid.  The action of the click is managed for both the player and the computer in a single function as set out below.
 
@@ -136,6 +136,7 @@ When either the player or the computer have destroyed all the crops, the game is
 I'm happy with the final deliverable which met the brief. In a relatively short time, I have produced a game that - I believe - looks fun and is easy to navigate and play.
 
 ### Making the computer play the game more intelligently
+* Please note:  The text below was written at the time I completed the project.  I was unhappy about not delivering this piece so a few weeks later when I had a free weekend, I added the code to make this capability work.  I have left the original text as written.
 
 I spent about twenty or so hours programming the computer to replicate how a human would play the game.
 
@@ -151,16 +152,15 @@ It is my intention to complete that code at the end of the course.
 
 I would like to include the following capabilities:
 * Responsive design - not working great on mobiles right now.
-* Complete the code to make the computer play the game more intelligently (ie once a 'hit' has been made - to target the cells around it until crop is completely destroyed).
+* Complete the code to make the computer play the game more intelligently (ie once a 'hit' has been made - to target the cells around it until crop is completely destroyed). * I added this code subsequently as mentioned above.
 * Enable player to plant his/her crops by clicking to select the orientation, then dragging them onto the grid.
 * Keep score between games.
-* Should be a sound to alert player when a single crop has been destroyed (image does update but is a bit subtle)
 
 ## What I learned
 
 This project was such a great learning experience.  Major learning points:
 * Generating functions and passing parameters back and forth between them
 * Try to never write the same piece of code more than once even if it's quite a small check (eg check if a cell falls within the grid)
-* Try to design a code solution before starting.  I did this for my crop planting and it went fairly well.  I didn't for the 'intelligent computer game-playing' and failed to complete it in the end.
+* Try to design a code solution before starting.  I did this for my crop planting and it went fairly well.  I didn't for the 'intelligent computer game-playing' and failed to complete it in the alotted timescale.
 * Everything takes 3 or 4 times longer than you think - even just placing a piece of text on a page.
 * Write meaningful messages when you commit your code on gitHub - makes life so much easier if you have to restore.

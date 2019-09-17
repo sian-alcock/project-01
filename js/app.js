@@ -91,7 +91,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     //Populate both grids and get the computer selections
     populateGrid(player1GridCells)
-    // Check the grid - if overlaps, go again
+    // Check the grid - if crops overlap, go again
     let gridCheck1 = player1GridCells.filter(cell => cell.classList.contains('planted')).length
 
     //Calculate how many cells should be planted
@@ -105,7 +105,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     player2GridCells.forEach(cell => cell.className='empty')
     populateGrid(player2GridCells)
-    // Check the grid - if overlaps, go again
+    // Check the grid - if crops overlap, go again
     let gridCheck2 = player2GridCells.filter(cell => cell.classList.contains('planted')).length
     while(gridCheck2 !== numOfCropCells) {
       player2GridCells.forEach(cell => cell.className='empty')
@@ -299,18 +299,6 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }
   }
-
-  // **********************Play the Game ******************************
-
-  // function getPlayer2Selection () {
-  //   // This function is run at setup - it contains the cells that the computer will select
-  //   // For MVP - simply shuffle the cells into a random order by putting each element in object with random sort key, then sorting using the random key then unmap to get the original objects
-  //   player2SelectedCells = player1GridCells
-  //     .map((a) => ({sort: Math.random(), value: a}))
-  //     .sort((a, b) => a.sort - b.sort)
-  //     .map((a) => a.value)
-  //   return player2SelectedCells
-  // }
 
   function playerHitRoutine (targetCell, player) {
     // Manages the actions on 'go' for both players
